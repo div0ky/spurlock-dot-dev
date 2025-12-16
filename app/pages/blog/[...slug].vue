@@ -163,7 +163,7 @@ const { data: relatedPosts } = await useAsyncData(`related-${slug}`, async () =>
               </p>
               <div class="flex justify-center gap-3 md:justify-start">
                 <a
-                  href="https://github.com/ajspurlock"
+                  href="https://github.com/div0ky"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 text-slate-600 transition-colors hover:bg-mint-500/10 hover:text-mint-600 dark:bg-surface-overlay dark:text-slate-400 dark:hover:text-mint-400"

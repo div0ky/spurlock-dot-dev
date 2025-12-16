@@ -2,9 +2,9 @@
 const currentYear = new Date().getFullYear()
 
 const socialLinks = [
-  { icon: 'lucide:github', href: 'https://github.com/ajspurlock', label: 'GitHub' },
+  { icon: 'lucide:github', href: 'https://github.com/div0ky', label: 'GitHub' },
   { icon: 'lucide:linkedin', href: 'https://linkedin.com/in/ajspurlock', label: 'LinkedIn' },
-  { icon: 'lucide:mail', href: 'mailto:aj@spurlock.dev', label: 'Email' },
+  { icon: 'lucide:mail', href: 'mailto:aaron.j.spurlock@gmail.com', label: 'Email' },
 ]
 
 const footerLinks = [
