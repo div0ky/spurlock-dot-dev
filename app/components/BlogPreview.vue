@@ -1,8 +1,6 @@
 <script setup lang="ts">
-const { data: posts } = await useAsyncData('latest-posts', async () => {
-  const all = await queryCollection('blog').all()
-  return all.slice(0, 3)
-},
+const { data: posts } = await useAsyncData('latest-posts', () =>
+  queryCollection('blog').limit(3).all(),
 )
 </script>
 
