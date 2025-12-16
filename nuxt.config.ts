@@ -62,4 +62,10 @@ export default defineNuxtConfig({
     },
     preset: 'vercel-static',
   },
+
+  runtimeConfig: {
+    public: {
+      email: 'aaron@spurlock.dev',
+    },
+  },
 })

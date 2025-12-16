@@ -193,4 +193,4 @@ All rights reserved © 2025 Aaron J. Spurlock
 - **Portfolio**: [spurlock.dev](https://spurlock.dev)
 - **GitHub**: [@div0ky](https://github.com/ajspurlock)
 - **LinkedIn**: [ajspurlock](https://linkedin.com/in/ajspurlock)
-- **Email**: [aj@spurlock.dev](mailto:aaron.j.spurlock@gmail.com)
+- **Email**: [aaron@spurlock.dev](mailto:aaron@spurlock.dev)

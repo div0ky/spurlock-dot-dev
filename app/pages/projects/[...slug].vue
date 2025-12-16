@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const config = useRuntimeConfig()
 const route = useRoute()
 const slug = Array.isArray(route.params.slug) ? route.params.slug.join('/') : route.params.slug
 
@@ -223,7 +224,7 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
         </p>
         <M3Button
           as="a"
-          href="mailto:aj@spurlock.dev"
+          :href="`mailto:${config.public.email}`"
           variant="primary"
           size="lg"
           icon="lucide:mail"

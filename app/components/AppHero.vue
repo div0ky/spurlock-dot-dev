@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const config = useRuntimeConfig()
 const titles = [
   'Head of Technology',
   'Vue Certified',
@@ -84,7 +85,7 @@ const techStack = computed(() => [...techStackArray].sort((a, b) => a.localeComp
 
           <M3Button
             as="a"
-            href="mailto:aj@spurlock.dev"
+            :href="`mailto:${config.public.email}`"
             variant="secondary"
             size="lg"
             icon="lucide:mail"

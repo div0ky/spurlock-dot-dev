@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const config = useRuntimeConfig()
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/#projects', label: 'Projects' },
@@ -56,7 +57,7 @@ function toggleMobileMenu() {
 
           <M3Button
             as="a"
-            href="mailto:aj@spurlock.dev"
+            :href="`mailto:${config.public.email}`"
             variant="primary"
             size="sm"
           >
@@ -110,7 +111,7 @@ function toggleMobileMenu() {
           </button>
 
           <a
-            href="mailto:aj@spurlock.dev"
+            :href="`mailto:${config.public.email}`"
             class="mt-2 rounded-lg bg-mint-500 px-4 py-3 text-center text-label-lg font-medium text-slate-900 transition-colors hover:bg-mint-600"
             @click="closeMobileMenu"
           >

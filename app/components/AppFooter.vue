@@ -1,10 +1,11 @@
 <script setup lang="ts">
+const config = useRuntimeConfig()
 const currentYear = new Date().getFullYear()
 
 const socialLinks = [
   { href: 'https://github.com/div0ky', icon: 'lucide:github', label: 'GitHub' },
   { href: 'https://linkedin.com/in/ajspurlock', icon: 'lucide:linkedin', label: 'LinkedIn' },
-  { href: 'mailto:aaron.j.spurlock@gmail.com', icon: 'lucide:mail', label: 'Email' },
+  { href: `mailto:${config.public.email}`, icon: 'lucide:mail', label: 'Email' },
 ]
 
 const footerLinks = [
