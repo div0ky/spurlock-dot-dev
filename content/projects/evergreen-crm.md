@@ -1,7 +1,7 @@
 ---
 title: "Evergreen CRM Module"
 description: "Comprehensive customer relationship management with lead tracking, pipeline management, and automated workflows. The foundation of the Evergreen platform."
-image: ""
+image: "/images/evergreen_crm.png"
 icon: "lucide:users"
 order: 2
 tags:

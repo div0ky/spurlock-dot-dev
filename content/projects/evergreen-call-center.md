@@ -1,7 +1,7 @@
 ---
 title: "Call Center Platform"
 description: "Full-featured call center solution with VoIP integration, call recording, quality monitoring, and agent performance tracking. Powers all inbound and outbound communications."
-image: ""
+image: "/images/evergreen_call-center.png"
 icon: "lucide:phone"
 order: 4
 tags:

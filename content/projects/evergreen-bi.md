@@ -1,7 +1,7 @@
 ---
 title: "Business Intelligence Dashboard"
 description: "Real-time analytics and reporting platform with customizable dashboards, KPI tracking, and data visualization for executive decision-making."
-image: ""
+image: "/images/evergreen_bi.png"
 icon: "lucide:bar-chart-3"
 order: 3
 tags:

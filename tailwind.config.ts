@@ -1,7 +1,13 @@
 import type { Config } from 'tailwindcss'
 
 export default {
-  content: [],
+  content: [
+    './app/**/*.{vue,js,ts}',
+    './components/**/*.{vue,js,ts}',
+    './layouts/**/*.{vue,js,ts}',
+    './pages/**/*.{vue,js,ts}',
+    './content/**/*.md',
+  ],
   theme: {
     extend: {
       colors: {
@@ -105,6 +111,8 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 } satisfies Config
 

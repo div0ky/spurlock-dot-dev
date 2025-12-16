@@ -20,12 +20,15 @@ defineProps<{
   >
     <!-- Image -->
     <div class="relative aspect-video overflow-hidden bg-surface-overlay">
-      <img
+      <NuxtImg
         v-if="project.image"
         :src="project.image"
         :alt="project.title"
+        width="640"
+        height="360"
         class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-      >
+        loading="lazy"
+      />
       <div
         v-else
         class="flex h-full w-full items-center justify-center bg-gradient-to-br from-mint-500/10 to-surface-elevated"

@@ -119,7 +119,7 @@ const { data: relatedPosts } = await useAsyncData(`related-${slug}`, async () =>
         <ContentRenderer
           v-if="post"
           :value="post"
-          class="prose prose-lg prose-invert max-w-none prose-headings:font-semibold prose-headings:text-white prose-h2:text-headline-lg prose-h3:text-headline-md prose-p:text-slate-300 prose-a:text-mint-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:text-mint-400 prose-pre:bg-surface-elevated prose-pre:border prose-pre:border-slate-800 prose-blockquote:border-mint-500 prose-blockquote:text-slate-400 prose-li:text-slate-300"
+          class="prose prose-lg prose-invert max-w-none prose-headings:font-semibold prose-headings:text-white prose-h2:mt-10 prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-p:text-slate-300 prose-a:text-mint-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:text-mint-400 prose-pre:bg-surface-elevated prose-pre:border prose-pre:border-slate-800 prose-blockquote:border-mint-500 prose-blockquote:text-slate-400 prose-li:text-slate-300"
         />
       </div>
     </article>

@@ -1,7 +1,7 @@
 ---
 title: "Client Portal"
 description: "Self-service portal for customers to track projects, view documents, make payments, and communicate with their project team. Reduces support calls while improving customer satisfaction."
-image: ""
+image: "/images/evergreen_portal.png"
 icon: "lucide:layout-grid"
 order: 5
 tags:

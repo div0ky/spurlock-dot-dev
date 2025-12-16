@@ -46,7 +46,7 @@ screenshots: []
 
 ## Overview
 
-Evergreen is the comprehensive business platform I invented and built from the ground up at Midtown Home Improvements. I prototyped it in two weeks as a basic CRM, and over the last 4 years and 7 months it has evolved into a full-scale enterprise system that powers every aspect of the business across all 5 branches.
+Evergreen is the comprehensive business platform I invented and built from the ground up at Midtown Home Improvements. I prototyped it in two weeks as a basic CRM, and over the last 5 years it has evolved into a full-scale enterprise system that powers every aspect of the business across all 5 branches.
 
 ## The Problem
 
