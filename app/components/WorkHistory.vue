@@ -10,11 +10,13 @@ interface Job {
   title: string
 }
 
+const currentJobDuration = calculateCurrentJobDuration({ startDate: '2021-05-10' })
+
 const jobs: Job[] = [
   {
     company: 'Midtown Home Improvements',
     description: 'Founded and lead the Technology department. Prototyped Evergreen in two weeks, which has evolved into an enterprise-grade platform powering all 5 branches. Built the development team from scratch and oversee all technology operations.',
-    duration: '4+ years',
+    duration: currentJobDuration,
     highlights: [
       'Invented and architected Evergreen — now powers the entire company across 5 branches',
       'Built full Call Center with Twilio integration for telemarketing operations',
@@ -23,20 +25,20 @@ const jobs: Job[] = [
       'Lead development team, DevOps, IT helpdesk, and network infrastructure',
     ],
     isCurrent: true,
-    period: '2020 - Present',
+    period: '2021 - Present',
     technologies: ['Nuxt', 'Nest.js', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'Twilio', 'Prisma'],
     title: 'Head of Technology',
   },
   {
     company: 'MightStream',
     description: 'Founded a live-streaming startup during COVID that offered live-stream embedding for mobile apps and websites. Grew to 1,000 daily active users and achieved profitability before sunset.',
-    duration: '1 year',
+    duration: '1 year 7 months',
     highlights: [
       'Built product from concept to 1,000 daily active users',
       'Achieved profitability as a solo founder',
       'Full-stack development and infrastructure management',
     ],
-    period: '2020 - 2021',
+    period: '2020 - 2022',
     technologies: ['Python', 'Django', 'PostgreSQL', 'TypeScript', 'Tailwind CSS', 'WebRTC', 'WebSockets', 'Docker'],
     title: 'Founder & CEO',
   },
@@ -50,20 +52,20 @@ const jobs: Job[] = [
       'Built internal tools to streamline operations',
       'Deep expertise in live streaming technology and APIs',
     ],
-    period: '2019 - 2020',
+    period: '2020 - 2021',
     technologies: ['JavaScript', 'Node.js', 'APIs', 'Live Streaming', 'WebRTC'],
     title: 'Technical Support Engineer',
   },
   {
     company: 'Apple',
     description: 'Started in AppleCare support and advanced to special projects involving engineering work. Gained deep understanding of Apple ecosystem and enterprise-level support operations.',
-    duration: '3 years',
+    duration: '2 years 3 months',
     highlights: [
       'Selected for special engineering projects',
       'Advanced technical troubleshooting and diagnostics',
       'Enterprise-level customer support experience',
     ],
-    period: '2016 - 2019',
+    period: '2013 - 2015',
     technologies: ['macOS', 'iOS', 'Diagnostics', 'Engineering Tools'],
     title: 'AppleCare Advisor & Special Projects',
   },
