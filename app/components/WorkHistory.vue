@@ -38,20 +38,21 @@ const jobs: Job[] = [
       'Achieved profitability as a solo founder',
       'Full-stack development and infrastructure management',
     ],
-    technologies: ['JavaScript', 'Node.js', 'WebRTC', 'Live Streaming APIs'],
+    technologies: ['Python', 'Django', 'PostgreSQL', 'TypeScript', 'Tailwind CSS', 'WebRTC', 'WebSockets', 'Docker'],
   },
   {
     title: 'Technical Support Engineer',
     company: 'Restream',
     period: '2019 - 2020',
     duration: '1 year',
-    description: 'Technical support for the leading multistreaming platform. Wrote JavaScript tooling for the support team and built internal tools to improve efficiency.',
+    description: 'Technical support for the leading multistreaming platform. Helped customers configure and troubleshoot their streaming setups while building internal tools to improve team efficiency.',
     highlights: [
+      'Supported customers with stream setup, configuration, and troubleshooting',
       'Developed JavaScript tools for support team automation',
       'Built internal tools to streamline operations',
-      'Deep expertise in live streaming technology',
+      'Deep expertise in live streaming technology and APIs',
     ],
-    technologies: ['JavaScript', 'Node.js', 'APIs', 'Live Streaming'],
+    technologies: ['JavaScript', 'Node.js', 'APIs', 'Live Streaming', 'WebRTC'],
   },
   {
     title: 'AppleCare Advisor & Special Projects',
@@ -125,9 +126,9 @@ const jobs: Job[] = [
             >
               <div class="group rounded-2xl border border-slate-800 bg-surface-elevated p-6 transition-all duration-300 hover:border-mint-500/30 hover:shadow-lg">
                 <!-- Header -->
-                <div class="mb-4 flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <div class="flex items-center gap-2">
+                <div class="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
                       <h3 class="text-headline-sm text-white">
                         {{ job.title }}
                       </h3>
@@ -142,7 +143,7 @@ const jobs: Job[] = [
                       {{ job.company }}
                     </p>
                   </div>
-                  <div class="text-right">
+                  <div class="flex-shrink-0 sm:text-right">
                     <p class="text-body-md text-slate-400">
                       {{ job.period }}
                     </p>

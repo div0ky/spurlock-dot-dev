@@ -9,11 +9,11 @@ tags:
 readingTime: 8
 ---
 
-After nearly five years of building Evergreen—a comprehensive enterprise platform that handles CRM, business intelligence, call center operations, and client portals—I've accumulated a wealth of lessons that I wish I'd known from day one.
+After nearly five years of building Evergreen - a comprehensive enterprise platform that handles CRM, business intelligence, call center operations, and client portals—I've accumulated a wealth of lessons that I wish I'd known from day one.
 
 ## 1. Start with the Data Model
 
-The single most important decision you'll make is your data model. Everything else—UI, features, integrations—can be changed relatively easily. Your core data model cannot.
+The single most important decision you'll make is your data model. Everything else - UI, features, integrations—can be changed relatively easily. Your core data model cannot.
 
 Spend the time upfront to really understand:
 
@@ -49,25 +49,24 @@ interface Address {
 }
 ```
 
-## 2. Boring Technology is Beautiful
+## 2. Boring Foundation, Strategic Innovation
 
-When I started Evergreen, I was tempted by shiny new technologies. GraphQL subscriptions! Event sourcing! CQRS!
+When I started Evergreen, I was tempted to use cutting-edge patterns everywhere. The key lesson: keep your foundation boring, but don't be afraid to use advanced patterns where they genuinely solve problems.
 
-Five years later, I'm grateful I largely resisted. Our stack is decidedly boring:
+Our core stack is deliberately boring:
 
-- **PostgreSQL** for everything database-related
+- **PostgreSQL** for everything database-related (with read replicas for BI)
 - **Redis** for caching and real-time features
-- **Vue.js** for the frontend
-- **Node.js** for the backend
+- **Vue.js/Nuxt** for the frontend
+- **Nest.js** for the backend
 
-These technologies are:
+But we strategically adopted advanced patterns where they made sense:
 
-- Well-documented
-- Battle-tested at scale
-- Easy to hire for
-- Predictable in production
+- **Event Sourcing** for audit trails and complex workflows where we need complete history
+- **Microservices** for specific high-scale features that benefit from isolation
+- **Queue-based Processing** with BullMQ for background jobs and async operations
 
-The lesson: Choose boring technology. Save your innovation budget for your actual product, not your infrastructure.
+The lesson: Choose boring technology for your foundation, but don't dogmatically avoid modern patterns when they solve real problems. The key is being intentional about when to use what.
 
 ## 3. Invest in Developer Experience
 
@@ -96,7 +95,7 @@ export interface Lead {
 
 ### Automated Testing
 
-Not 100% coverage—that's diminishing returns. But comprehensive tests for:
+Not 100% coverage - that's diminishing returns. But comprehensive tests for:
 
 - Critical business logic
 - API contracts
@@ -148,5 +147,5 @@ The next five years will bring new challenges—AI integration, mobile expansion
 - Communicate relentlessly
 - Build for maintainability
 
-The best enterprise software isn't the most technically impressive—it's the software that reliably solves real problems, year after year.
+The best enterprise software isn't the most technically impressive; it's the software that reliably solves real problems, year after year.
 

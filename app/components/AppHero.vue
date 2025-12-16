@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const titles = [
   'Head of Technology',
+  'Vue Certified Developer',
   'Full-Stack Developer',
   'System Architect',
-  'DevOps Engineer',
 ]
 
 const currentTitleIndex = ref(0)

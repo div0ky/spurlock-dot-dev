@@ -33,7 +33,7 @@ const footerLinks = [
             </span>
           </NuxtLink>
           <p class="max-w-xs text-body-sm text-slate-400">
-            Head of Technology, Full-Stack Developer, and System Architect building enterprise-grade solutions.
+            Vue Certified Developer, Head of Technology, and System Architect building enterprise-grade solutions.
           </p>
         </div>
 
@@ -86,11 +86,11 @@ const footerLinks = [
         <p class="text-body-sm text-slate-500">
           &copy; {{ currentYear }} Aaron J. Spurlock. All rights reserved.
         </p>
-        <p class="text-body-sm text-slate-500">
+        <p class="flex items-center gap-1 text-body-sm text-slate-500">
           Built with
           <Icon
             name="lucide:heart"
-            class="mx-1 inline h-4 w-4 text-mint-500"
+            class="h-4 w-4 text-red-500"
           />
           using Nuxt 4 &amp; Tailwind
         </p>

@@ -39,7 +39,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Spurlock.dev | Developer Portfolio',
       meta: [
-        { name: 'description', content: 'Aaron J. Spurlock - Head of Technology, Full-Stack Developer, and System Architect' },
+        { name: 'description', content: 'Aaron J. Spurlock - Vue Certified Developer, Head of Technology, and System Architect' },
       ],
     },
   },
