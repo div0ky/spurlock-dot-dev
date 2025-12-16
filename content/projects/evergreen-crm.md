@@ -4,6 +4,7 @@ description: "Comprehensive customer relationship management with lead tracking,
 image: "/images/evergreen_crm.png"
 icon: "lucide:users"
 order: 2
+parent: "evergreen"
 tags:
   - Nuxt
   - Prisma

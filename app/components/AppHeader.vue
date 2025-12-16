@@ -1,20 +1,20 @@
 <script setup lang="ts">
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Projects', href: '/#projects' },
-  { label: 'Experience', href: '/#experience' },
-  { label: 'Blog', href: '/blog' },
+  { href: '/', label: 'Home' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/blog', label: 'Blog' },
 ]
 
 const isMobileMenuOpen = ref(false)
 const { isDark, toggleTheme } = useTheme()
 
-function toggleMobileMenu() {
-  isMobileMenuOpen.value = !isMobileMenuOpen.value
-}
-
 function closeMobileMenu() {
   isMobileMenuOpen.value = false
+}
+
+function toggleMobileMenu() {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
 </script>
 

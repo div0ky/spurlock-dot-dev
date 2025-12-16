@@ -16,11 +16,11 @@ if (!project.value) {
 }
 
 useSeoMeta({
-  title: () => `${project.value?.title} | Aaron J. Spurlock`,
   description: () => project.value?.description,
-  ogTitle: () => project.value?.title,
   ogDescription: () => project.value?.description,
+  ogTitle: () => project.value?.title,
   ogType: 'article',
+  title: () => `${project.value?.title} | Aaron J. Spurlock`,
 })
 
 // Get related projects

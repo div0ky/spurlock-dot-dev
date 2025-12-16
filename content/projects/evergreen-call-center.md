@@ -4,6 +4,7 @@ description: "Full-featured call center solution with VoIP integration, call rec
 image: "/images/evergreen_call-center.png"
 icon: "lucide:phone"
 order: 4
+parent: "evergreen"
 tags:
   - Twilio
   - WebSockets

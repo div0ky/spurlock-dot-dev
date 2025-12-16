@@ -17,7 +17,8 @@ export function useTheme() {
     const html = document.documentElement
     if (dark) {
       html.classList.add('dark')
-    } else {
+    }
+    else {
       html.classList.remove('dark')
     }
   }
@@ -28,7 +29,7 @@ export function useTheme() {
     localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
   }
 
-  function setTheme(theme: 'light' | 'dark') {
+  function setTheme(theme: 'dark' | 'light') {
     isDark.value = theme === 'dark'
     applyTheme(isDark.value)
     localStorage.setItem('theme', theme)
@@ -40,8 +41,7 @@ export function useTheme() {
 
   return {
     isDark: readonly(isDark),
-    toggleTheme,
     setTheme,
+    toggleTheme,
   }
 }
-

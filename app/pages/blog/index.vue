@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Blog | Aaron J. Spurlock',
   description: 'Thoughts on development, architecture, and building enterprise software.',
+  title: 'Blog | Aaron J. Spurlock',
 })
 
 const { data: posts } = await useAsyncData('blog-posts', () =>
@@ -14,7 +14,7 @@ const allTags = computed(() => {
   return [...new Set(tags)]
 })
 
-const selectedTag = ref<string | null>(null)
+const selectedTag = ref<null | string>(null)
 
 const filteredPosts = computed(() => {
   if (!posts.value) return []
@@ -23,7 +23,7 @@ const filteredPosts = computed(() => {
   return posts.value.filter(post => post.tags?.includes(tag))
 })
 
-function selectTag(tag: string | null) {
+function selectTag(tag: null | string) {
   selectedTag.value = selectedTag.value === tag ? null : tag
 }
 </script>

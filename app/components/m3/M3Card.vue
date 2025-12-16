@@ -1,14 +1,14 @@
 <script setup lang="ts">
 interface Props {
-  variant?: 'elevated' | 'outlined'
+  as?: 'article' | 'div' | 'section'
   hoverable?: boolean
-  as?: 'div' | 'article' | 'section'
+  variant?: 'elevated' | 'outlined'
 }
 
 withDefaults(defineProps<Props>(), {
-  variant: 'elevated',
-  hoverable: false,
   as: 'div',
+  hoverable: false,
+  variant: 'elevated',
 })
 </script>
 
@@ -26,4 +26,3 @@ withDefaults(defineProps<Props>(), {
     <slot />
   </component>
 </template>
-

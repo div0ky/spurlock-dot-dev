@@ -1,11 +1,11 @@
 <script setup lang="ts">
 interface Project {
-  slug: string
-  title: string
   description: string
-  image?: string
-  tags: string[]
   featured?: boolean
+  image?: string
+  slug: string
+  tags: string[]
+  title: string
 }
 
 defineProps<{

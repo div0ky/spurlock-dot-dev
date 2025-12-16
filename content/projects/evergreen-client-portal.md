@@ -4,6 +4,7 @@ description: "Self-service portal for customers to track projects, view document
 image: "/images/evergreen_portal.png"
 icon: "lucide:layout-grid"
 order: 5
+parent: "evergreen"
 tags:
   - Nuxt
   - File Uploads

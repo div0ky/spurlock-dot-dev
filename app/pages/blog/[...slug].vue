@@ -16,19 +16,19 @@ if (!post.value) {
 }
 
 useSeoMeta({
-  title: () => `${post.value?.title} | Aaron J. Spurlock`,
-  description: () => post.value?.description,
-  ogTitle: () => post.value?.title,
-  ogDescription: () => post.value?.description,
-  ogType: 'article',
   articlePublishedTime: () => post.value?.date,
+  description: () => post.value?.description,
+  ogDescription: () => post.value?.description,
+  ogTitle: () => post.value?.title,
+  ogType: 'article',
+  title: () => `${post.value?.title} | Aaron J. Spurlock`,
 })
 
 function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
     day: 'numeric',
+    month: 'long',
+    year: 'numeric',
   })
 }
 

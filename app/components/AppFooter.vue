@@ -2,16 +2,16 @@
 const currentYear = new Date().getFullYear()
 
 const socialLinks = [
-  { icon: 'lucide:github', href: 'https://github.com/div0ky', label: 'GitHub' },
-  { icon: 'lucide:linkedin', href: 'https://linkedin.com/in/ajspurlock', label: 'LinkedIn' },
-  { icon: 'lucide:mail', href: 'mailto:aaron.j.spurlock@gmail.com', label: 'Email' },
+  { href: 'https://github.com/div0ky', icon: 'lucide:github', label: 'GitHub' },
+  { href: 'https://linkedin.com/in/ajspurlock', icon: 'lucide:linkedin', label: 'LinkedIn' },
+  { href: 'mailto:aaron.j.spurlock@gmail.com', icon: 'lucide:mail', label: 'Email' },
 ]
 
 const footerLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Projects', href: '/#projects' },
-  { label: 'Experience', href: '/#experience' },
-  { label: 'Blog', href: '/blog' },
+  { href: '/', label: 'Home' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/blog', label: 'Blog' },
 ]
 </script>
 

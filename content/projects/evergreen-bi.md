@@ -4,6 +4,7 @@ description: "Real-time analytics and reporting platform with customizable dashb
 image: "/images/evergreen_bi.png"
 icon: "lucide:bar-chart-3"
 order: 3
+parent: "evergreen"
 tags:
   - WebSockets
   - Redis

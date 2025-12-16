@@ -1,8 +1,8 @@
 <script setup lang="ts">
 interface Screenshot {
-  src: string
   alt: string
   caption?: string
+  src: string
 }
 
 const props = defineProps<{
@@ -10,31 +10,16 @@ const props = defineProps<{
   title?: string
 }>()
 
-const selectedIndex = ref<number | null>(null)
+const selectedIndex = ref<null | number>(null)
 
 const selectedScreenshot = computed(() => {
   if (selectedIndex.value === null) return null
   return props.screenshots[selectedIndex.value]
 })
 
-function openLightbox(index: number) {
-  selectedIndex.value = index
-  document.body.style.overflow = 'hidden'
-}
-
 function closeLightbox() {
   selectedIndex.value = null
   document.body.style.overflow = ''
-}
-
-function nextImage() {
-  if (selectedIndex.value === null) return
-  selectedIndex.value = (selectedIndex.value + 1) % props.screenshots.length
-}
-
-function prevImage() {
-  if (selectedIndex.value === null) return
-  selectedIndex.value = (selectedIndex.value - 1 + props.screenshots.length) % props.screenshots.length
 }
 
 function handleKeydown(e: KeyboardEvent) {
@@ -42,6 +27,21 @@ function handleKeydown(e: KeyboardEvent) {
   if (e.key === 'Escape') closeLightbox()
   if (e.key === 'ArrowRight') nextImage()
   if (e.key === 'ArrowLeft') prevImage()
+}
+
+function nextImage() {
+  if (selectedIndex.value === null) return
+  selectedIndex.value = (selectedIndex.value + 1) % props.screenshots.length
+}
+
+function openLightbox(index: number) {
+  selectedIndex.value = index
+  document.body.style.overflow = 'hidden'
+}
+
+function prevImage() {
+  if (selectedIndex.value === null) return
+  selectedIndex.value = (selectedIndex.value - 1 + props.screenshots.length) % props.screenshots.length
 }
 
 onMounted(() => {

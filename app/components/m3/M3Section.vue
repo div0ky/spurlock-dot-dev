@@ -1,20 +1,20 @@
 <script setup lang="ts">
 interface Props {
-  id?: string
   background?: 'default' | 'dim'
-  padding?: 'sm' | 'md' | 'lg'
+  id?: string
+  padding?: 'lg' | 'md' | 'sm'
 }
 
 withDefaults(defineProps<Props>(), {
-  id: undefined,
   background: 'default',
+  id: undefined,
   padding: 'lg',
 })
 
 const paddingClasses = {
-  sm: 'py-12',
-  md: 'py-16',
   lg: 'py-24',
+  md: 'py-16',
+  sm: 'py-12',
 }
 </script>
 
@@ -35,4 +35,3 @@ const paddingClasses = {
     </div>
   </section>
 </template>
-

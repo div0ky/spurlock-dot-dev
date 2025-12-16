@@ -1,12 +1,12 @@
 <script setup lang="ts">
 interface BlogPost {
-  path: string
-  title: string
-  description: string
   date: string
-  tags?: string[]
-  readingTime?: number
+  description: string
   image?: string
+  path: string
+  readingTime?: number
+  tags?: string[]
+  title: string
 }
 
 defineProps<{
@@ -15,9 +15,9 @@ defineProps<{
 
 function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
     day: 'numeric',
+    month: 'long',
+    year: 'numeric',
   })
 }
 </script>

@@ -1,22 +1,20 @@
 <script setup lang="ts">
 interface Job {
-  title: string
   company: string
-  period: string
-  duration: string
   description: string
+  duration: string
   highlights: string[]
-  technologies: string[]
   isCurrent?: boolean
+  period: string
+  technologies: string[]
+  title: string
 }
 
 const jobs: Job[] = [
   {
-    title: 'Head of Technology',
     company: 'Midtown Home Improvements',
-    period: '2020 - Present',
-    duration: '4+ years',
     description: 'Founded and lead the Technology department. Prototyped Evergreen in two weeks, which has evolved into an enterprise-grade platform powering all 5 branches. Built the development team from scratch and oversee all technology operations.',
+    duration: '4+ years',
     highlights: [
       'Invented and architected Evergreen — now powers the entire company across 5 branches',
       'Built full Call Center with Twilio integration for telemarketing operations',
@@ -24,48 +22,50 @@ const jobs: Job[] = [
       'Tech stack: Nuxt, Nest.js, PostgreSQL, Redis, BullMQ, Prisma, Docker',
       'Lead development team, DevOps, IT helpdesk, and network infrastructure',
     ],
-    technologies: ['Nuxt', 'Nest.js', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'Twilio', 'Prisma'],
     isCurrent: true,
+    period: '2020 - Present',
+    technologies: ['Nuxt', 'Nest.js', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'Twilio', 'Prisma'],
+    title: 'Head of Technology',
   },
   {
-    title: 'Founder & CEO',
     company: 'MightStream',
-    period: '2020 - 2021',
-    duration: '1 year',
     description: 'Founded a live-streaming startup during COVID that offered live-stream embedding for mobile apps and websites. Grew to 1,000 daily active users and achieved profitability before sunset.',
+    duration: '1 year',
     highlights: [
       'Built product from concept to 1,000 daily active users',
       'Achieved profitability as a solo founder',
       'Full-stack development and infrastructure management',
     ],
+    period: '2020 - 2021',
     technologies: ['Python', 'Django', 'PostgreSQL', 'TypeScript', 'Tailwind CSS', 'WebRTC', 'WebSockets', 'Docker'],
+    title: 'Founder & CEO',
   },
   {
-    title: 'Technical Support Engineer',
     company: 'Restream',
-    period: '2019 - 2020',
-    duration: '1 year',
     description: 'Technical support for the leading multistreaming platform. Helped customers configure and troubleshoot their streaming setups while building internal tools to improve team efficiency.',
+    duration: '1 year',
     highlights: [
       'Supported customers with stream setup, configuration, and troubleshooting',
       'Developed JavaScript tools for support team automation',
       'Built internal tools to streamline operations',
       'Deep expertise in live streaming technology and APIs',
     ],
+    period: '2019 - 2020',
     technologies: ['JavaScript', 'Node.js', 'APIs', 'Live Streaming', 'WebRTC'],
+    title: 'Technical Support Engineer',
   },
   {
-    title: 'AppleCare Advisor & Special Projects',
     company: 'Apple',
-    period: '2016 - 2019',
-    duration: '3 years',
     description: 'Started in AppleCare support and advanced to special projects involving engineering work. Gained deep understanding of Apple ecosystem and enterprise-level support operations.',
+    duration: '3 years',
     highlights: [
       'Selected for special engineering projects',
       'Advanced technical troubleshooting and diagnostics',
       'Enterprise-level customer support experience',
     ],
+    period: '2016 - 2019',
     technologies: ['macOS', 'iOS', 'Diagnostics', 'Engineering Tools'],
+    title: 'AppleCare Advisor & Special Projects',
   },
 ]
 </script>

@@ -1,54 +1,17 @@
 <script setup lang="ts">
-interface Project {
-  slug: string
-  title: string
-  description: string
-  image?: string
-  tags: string[]
-  featured?: boolean
-}
+const { data: projects } = await useAsyncData('showcase-projects', () =>
+  queryCollection('projects').all(),
+)
 
-const projects: Project[] = [
-  {
-    slug: 'evergreen',
-    title: 'Evergreen',
-    description: 'Enterprise platform powering all operations across 5 branches. Prototyped in 2 weeks, evolved over 4+ years into a comprehensive business system with CRM, Call Center, BI, and Client Portal.',
-    image: '/images/evergreen_featured.png',
-    tags: ['Nuxt', 'Nest.js', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'Twilio', 'Prisma'],
-    featured: true,
-  },
-  {
-    slug: 'evergreen-crm',
-    title: 'Evergreen CRM Module',
-    description: 'Contact management, lead aggregation from external sources, SMS messaging, and automated workflows powering sales operations.',
-    image: '/images/evergreen_crm.png',
-    tags: ['Nuxt', 'Prisma', 'PostgreSQL', 'BullMQ'],
-  },
-  {
-    slug: 'evergreen-bi',
-    title: 'Business Intelligence Dashboard',
-    description: 'Real-time analytics and reporting with customizable dashboards, KPI tracking, and data visualization across all business operations.',
-    image: '/images/evergreen_bi.png',
-    tags: ['WebSockets', 'Redis', 'PostgreSQL', 'Read Replicas'],
-  },
-  {
-    slug: 'evergreen-call-center',
-    title: 'Call Center Platform',
-    description: 'Full Twilio-powered call center used by telemarketers daily. Features call recording, real-time monitoring, and performance tracking.',
-    image: '/images/evergreen_call-center.png',
-    tags: ['Twilio', 'WebSockets', 'Redis', 'BullMQ'],
-  },
-  {
-    slug: 'evergreen-client-portal',
-    title: 'Client Portal',
-    description: 'Self-service portal for customers to track production jobs, view documents, service tickets, and communicate with their project team.',
-    image: '/images/evergreen_portal.png',
-    tags: ['Nuxt', 'File Uploads', 'Real-time Updates'],
-  },
-]
+const featuredProject = computed(() =>
+  projects.value?.find(p => p.featured && !p.parent),
+)
 
-const featuredProject = computed(() => projects.find(p => p.featured))
-const otherProjects = computed(() => projects.filter(p => !p.featured))
+const childProjects = computed(() =>
+  projects.value
+    ?.filter(p => p.parent === 'evergreen')
+    .sort((a, b) => (a.order ?? 99) - (b.order ?? 99)) ?? [],
+)
 </script>
 
 <template>
@@ -69,7 +32,7 @@ const otherProjects = computed(() => projects.filter(p => !p.featured))
       class="mb-12"
     >
       <NuxtLink
-        :to="`/projects/${featuredProject.slug}`"
+        :to="featuredProject.path"
         class="group relative block rounded-3xl border border-slate-200 bg-white transition-all duration-500 hover:border-mint-500/30 hover:shadow-2xl hover:shadow-mint-500/10 dark:border-slate-800 dark:bg-surface-elevated"
       >
         <div class="grid gap-8 p-8 lg:grid-cols-2 lg:p-12">
@@ -114,8 +77,8 @@ const otherProjects = computed(() => projects.filter(p => !p.featured))
           <div class="relative self-start">
             <div class="aspect-video overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-surface-overlay">
               <NuxtImg
-                src="/images/evergreen_featured.png"
-                alt="Evergreen Dashboard showing branch scorecards and analytics"
+                :src="featuredProject.image"
+                :alt="`${featuredProject.title} screenshot`"
                 width="640"
                 height="360"
                 class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
@@ -131,19 +94,42 @@ const otherProjects = computed(() => projects.filter(p => !p.featured))
       </NuxtLink>
     </div>
 
-    <!-- Other Projects Grid -->
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
-      <ProjectCard
-        v-for="project in otherProjects"
-        :key="project.slug"
-        :project="project"
-      />
+    <!-- Modules Grid -->
+    <div
+      v-if="childProjects.length"
+      class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+    >
+      <NuxtLink
+        v-for="child in childProjects"
+        :key="child.path"
+        :to="child.path"
+        class="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:border-mint-500/30 hover:shadow-xl dark:border-slate-800 dark:bg-surface-elevated"
+      >
+        <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-mint-500/10">
+          <Icon
+            :name="child.icon || 'lucide:box'"
+            class="h-6 w-6 text-mint-500"
+          />
+        </div>
+        <h4 class="mb-2 text-title-lg text-slate-900 transition-colors group-hover:text-mint-600 dark:text-white dark:group-hover:text-mint-400">
+          {{ child.title }}
+        </h4>
+        <p class="mb-4 line-clamp-2 flex-1 text-body-md text-slate-600 dark:text-slate-400">
+          {{ child.description }}
+        </p>
+        <div class="flex items-center gap-1 text-label-md font-medium text-mint-600 dark:text-mint-400">
+          Learn more
+          <Icon
+            name="lucide:arrow-right"
+            class="h-4 w-4 transition-transform group-hover:translate-x-1"
+          />
+        </div>
+      </NuxtLink>
     </div>
 
     <!-- View All Link -->
     <div class="mt-12 text-center">
       <M3Button
-        as="NuxtLink"
         to="/projects"
         variant="secondary"
         size="lg"

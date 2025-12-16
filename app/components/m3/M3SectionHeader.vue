@@ -1,15 +1,15 @@
 <script setup lang="ts">
 interface Props {
+  align?: 'center' | 'left'
+  description?: string
   label?: string
   title: string
-  description?: string
-  align?: 'left' | 'center'
 }
 
 withDefaults(defineProps<Props>(), {
-  label: undefined,
-  description: undefined,
   align: 'center',
+  description: undefined,
+  label: undefined,
 })
 </script>
 
@@ -37,4 +37,3 @@ withDefaults(defineProps<Props>(), {
     <slot />
   </div>
 </template>
-
