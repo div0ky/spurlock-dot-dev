@@ -1,6 +1,6 @@
 ---
 title: "Evergreen CRM Module"
-description: "Comprehensive customer relationship management with lead tracking, pipeline management, and automated workflows. The foundation of the Evergreen platform."
+description: "Comprehensive customer relationship management with lead tracking, pipeline management, Oracle ML scoring, property enrichment, and automated workflows. The foundation of the Evergreen platform."
 image: "/images/evergreen_crm.png"
 icon: "lucide:users"
 order: 2
@@ -11,6 +11,8 @@ tags:
   - PostgreSQL
   - BullMQ
   - WebSockets
+  - SmartyStreets
+  - Python
 techStack:
   frontend:
     - Vue 3 Composition API
@@ -18,10 +20,13 @@ techStack:
     - VueUse
     - Tailwind CSS
   backend:
-    - Node.js
-    - Express
+    - Nuxt Server Routes
     - PostgreSQL
     - Prisma ORM
+  integrations:
+    - SmartyStreets (address validation)
+    - Oracle ML (lead scoring)
+    - Twilio (sticky numbers)
 screenshots: []
 ---
 
@@ -35,8 +40,34 @@ The CRM module serves as the foundation of Evergreen, managing the complete cust
 
 - **Multi-source capture**: Web forms, phone calls, referrals, and third-party lead providers
 - **Intelligent routing**: Automatic assignment based on territory, workload, and rep performance
-- **Lead scoring**: Algorithmic prioritization based on likelihood to convert
+- **Oracle ML Scoring**: Custom ML model predicts sale likelihood and optimal rep assignment
 - **Duplicate detection**: Automatic identification and merging of duplicate contacts
+
+### Oracle ML Integration
+
+The CRM integrates with Oracle, our custom-trained ML model:
+
+- **Sale Prediction**: Probability score for each lead based on historical patterns
+- **Rep Matching**: Ranks which sales rep has the best chance of closing
+- **Lift Calculation**: Measures improvement over baseline random assignment
+- **Data Sources**: Geolocation, soft credit, market data, historical outcomes
+
+### Property Data Enrichment
+
+Automatic enrichment of contact records with property intelligence:
+
+- **Geodata**: Lat/lng coordinates, neighborhood context, proximity to branches
+- **Property Data**: Home characteristics, estimated value, ownership info
+- **Market Context**: Local trends, seasonality factors
+
+### Address Validation
+
+SmartyStreets integration for address quality:
+
+- **Real-time Validation**: Verify addresses as they're entered
+- **Standardization**: Normalize to USPS format
+- **Geocoding**: Automatic lat/lng assignment for mapping
+- **Deliverability**: Flag undeliverable addresses
 
 ### Pipeline Management
 
@@ -46,6 +77,25 @@ Visual kanban-style pipeline with:
 - Customizable pipeline stages per product line
 - Automated stage transitions based on events
 - Stale lead alerts and escalations
+
+### Contact Bucketing System
+
+Intelligent call queue management for telemarketing:
+
+- **Buckets**: Configurable groups that control call priority and timing
+- **Call Rules**: Per-bucket rules for delay periods (days/hours/minutes)
+- **Weighted Priority**: Some buckets get more attention than others
+- **Automatic Transitions**: Contacts move between buckets based on call results
+- **Attempt Tracking**: Track total calls and bucket-specific attempts
+
+### Sticky Number Assignment
+
+Consistent caller ID for better answer rates:
+
+- **Sticky Numbers**: Each contact gets assigned a consistent Twilio number
+- **Answer Rate Optimization**: Customers see same number = higher pickup rate
+- **Audit Trail**: Track when/how sticky number was assigned (AMD, outbound call, SMS)
+- **DNC Compliance**: Full audit for Do Not Call/Text with source tracking
 
 ### Activity Tracking
 
@@ -58,57 +108,13 @@ Complete history of all customer interactions:
 
 ### Automation Engine
 
-Workflow automation that saves hours daily:
-
-```typescript
-// Example workflow: New lead follow-up sequence
-const newLeadWorkflow = createWorkflow({
-  trigger: 'lead.created',
-  steps: [
-    { action: 'sendEmail', template: 'welcome', delay: 0 },
-    { action: 'createTask', type: 'call', delay: '1h' },
-    { action: 'sendSms', template: 'intro', delay: '4h' },
-    { action: 'createTask', type: 'follow-up', delay: '24h' },
-  ],
-  conditions: {
-    leadScore: { gte: 50 },
-    source: { notIn: ['existing-customer'] },
-  },
-})
-```
+Event-driven workflow automation via Trigger.dev handles multi-step follow-up sequences, conditional logic based on lead scores and sources, and scheduled task creation—saving hours of manual work daily.
 
 ## Technical Implementation
 
 ### State Management
 
-Using Pinia for reactive state management with persistence:
-
-```typescript
-export const useLeadsStore = defineStore('leads', () => {
-  const leads = ref<Lead[]>([])
-  const isLoading = ref(false)
-  
-  const leadsByStage = computed(() => {
-    return leads.value.reduce((acc, lead) => {
-      const stage = lead.pipelineStage
-      acc[stage] = acc[stage] || []
-      acc[stage].push(lead)
-      return acc
-    }, {} as Record<string, Lead[]>)
-  })
-
-  async function fetchLeads(filters: LeadFilters) {
-    isLoading.value = true
-    try {
-      leads.value = await api.leads.list(filters)
-    } finally {
-      isLoading.value = false
-    }
-  }
-
-  return { leads, leadsByStage, isLoading, fetchLeads }
-})
-```
+Pinia stores manage reactive client-side state with computed views (leads grouped by pipeline stage), optimistic updates, and persistence across sessions.
 
 ### Real-time Updates
 

@@ -1,33 +1,41 @@
 ---
 title: "Call Center Platform"
-description: "Full-featured call center solution with VoIP integration, call recording, quality monitoring, and agent performance tracking. Powers all inbound and outbound communications."
+description: "Full-featured call center with VoIP, real-time state management via Convex, AI-powered call grading, two-way SMS, and quality monitoring. Powers all inbound and outbound communications for the sales team."
 image: "/images/evergreen_call-center.png"
 icon: "lucide:phone"
 order: 4
 parent: "evergreen"
 tags:
   - Twilio
+  - Convex
   - WebSockets
   - Redis
-  - BullMQ
+  - Google Gemini
   - PostgreSQL
 techStack:
   voip:
     - Twilio Programmable Voice
+    - Twilio Voice SDK
     - WebRTC
-    - SIP Trunking
   real-time:
-    - Socket.io
-    - Redis PubSub
+    - Convex (9 tables)
+    - Ably
+    - WebSockets
+  ai:
+    - Google Gemini (call grading)
+    - OpenAI (transcription)
   storage:
     - AWS S3 (recordings)
     - PostgreSQL
+    - Convex (hot state)
 screenshots: []
 ---
 
 ## Overview
 
 The Call Center module transforms every computer into a powerful softphone, enabling sales reps and support staff to make and receive calls directly in their browser without additional hardware.
+
+A key architectural decision was implementing **Convex** for real-time state management. With 9 dedicated Convex tables, the system handles agent availability, call queues, active calls, SMS threads, and contact tab synchronization—all with sub-second reactivity across all connected agents.
 
 ## Key Features
 
@@ -51,24 +59,7 @@ Every call is automatically:
 
 ### Quality Monitoring
 
-Tools for managers to ensure call quality:
-
-```typescript
-// Quality scorecard structure
-interface CallScorecard {
-  callId: string
-  agentId: string
-  scores: {
-    greeting: 1 | 2 | 3 | 4 | 5
-    productKnowledge: 1 | 2 | 3 | 4 | 5
-    problemResolution: 1 | 2 | 3 | 4 | 5
-    professionalism: 1 | 2 | 3 | 4 | 5
-    closing: 1 | 2 | 3 | 4 | 5
-  }
-  feedback: string
-  coachingNotes: string
-}
-```
+Tools for managers to ensure call quality with structured scorecards covering greeting, product knowledge, problem resolution, professionalism, and closing—each rated 1-5 with feedback and coaching notes.
 
 ### Real-time Dashboard
 
@@ -79,54 +70,69 @@ Live visibility into call center operations:
 - Queue depth and wait times
 - Historical metrics and trends
 
+### SMS Platform
+
+Two-way SMS messaging with real-time inbox:
+
+- **Real-time Inbox**: Convex-powered message threads with instant updates
+- **Thread Locking**: Prevents multiple agents from responding to same conversation
+- **Canned Responses**: Pre-built templates for common scenarios
+- **DNC Compliance**: Full audit trail for Do Not Call/Text with timestamps and source
+- **Grammar Suggestions**: AI-powered writing assistance via Gemini
+
+### AI-Powered Features
+
+Leveraging Google Gemini and OpenAI for intelligent automation:
+
+- **Call Audio Grading**: AI analyzes call recordings and scores agent performance
+- **Agent Performance Summaries**: Automated insights on individual agent trends
+- **Group Performance Analysis**: AI-generated reports on team metrics
+- **Real-time Transcription**: Calls transcribed for searchability and review
+- **Grammar Suggestions**: AI proofreads SMS messages before sending
+
+## Convex Real-time Architecture
+
+The call center uses Convex for all real-time state, with PostgreSQL as the permanent archive:
+
+### 9 Convex Tables
+
+| Table | Purpose |
+|-------|---------|
+| `agent_status` | Tracks agent availability (available/busy/away) |
+| `incoming_call_queue` | Queue of incoming calls waiting for agents |
+| `user_contact_tabs` | Persists open contact tabs across devices |
+| `active_calls` | Prevents double-dial by tracking live calls |
+| `call_queue` | "Next Call" queue for outbound campaigns |
+| `transfer_queue` | Pending call transfers between agents |
+| `agent_skills` | Skill-based routing for transfers |
+| `sms_messages` | Hot storage for active SMS threads |
+| `sms_thread_locks` | Real-time locking for conversation editing |
+
+### Why Convex + PostgreSQL?
+
+- **Convex**: Hot ephemeral state that needs sub-second reactivity
+- **PostgreSQL**: Permanent archive, complex queries, reporting
+
+```
+New SMS → Postgres (archive) → Convex (hot) → Real-time UI
+                                    ↓
+                          Hydrate last 10 messages
+```
+
 ## Technical Architecture
 
 ### Twilio Integration
 
-Using Twilio's Client SDK for browser-based calling:
-
-```typescript
-// Initialize Twilio Device
-async function initializePhone() {
-  const token = await fetchTwilioToken()
-  
-  device.value = new Twilio.Device(token, {
-    edge: 'ashburn',
-    closeProtection: true,
-  })
-
-  device.value.on('incoming', handleIncomingCall)
-  device.value.on('disconnect', handleDisconnect)
-  
-  await device.value.register()
-}
-
-// Make outbound call
-async function makeCall(phoneNumber: string, leadId: string) {
-  const connection = await device.value.connect({
-    params: {
-      To: phoneNumber,
-      LeadId: leadId,
-    },
-  })
-  
-  activeCall.value = connection
-}
-```
+The Twilio Voice SDK enables browser-based calling via WebRTC. Agents initialize a Device with JWT token authentication, register event handlers for incoming calls and disconnects, and can make outbound calls with custom parameters (phone number, lead ID) that flow through to webhooks.
 
 ### Real-time State Synchronization
 
-Redis PubSub for live updates across all agents:
+Convex mutations provide instant updates across all connected agents. When one agent changes status or takes a call, all subscribed clients see the update immediately—no manual pub/sub required.
 
-```typescript
-// Agent status updates broadcast to all subscribers
-redisPublisher.publish('agent:status', JSON.stringify({
-  agentId: user.id,
-  status: 'on-call',
-  callId: call.id,
-  timestamp: Date.now(),
-}))
-```
+The hybrid architecture uses:
+- **Convex**: Real-time state (agent status, call queue, SMS threads)
+- **Ably**: Event broadcasting for specific notifications
+- **PostgreSQL**: Permanent storage and complex reporting queries
 
 ### Call Flow
 

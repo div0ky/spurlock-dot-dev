@@ -1,6 +1,6 @@
 ---
 title: "Business Intelligence Dashboard"
-description: "Real-time analytics and reporting platform with customizable dashboards, KPI tracking, and data visualization for executive decision-making."
+description: "Real-time analytics and reporting platform with department-specific scorecards, KPI tracking, and data visualization. Includes separate CMO Dashboard for executive decision-making."
 image: "/images/evergreen_bi.png"
 icon: "lucide:bar-chart-3"
 order: 3
@@ -10,19 +10,20 @@ tags:
   - Redis
   - PostgreSQL
   - Read Replicas
-  - PostgreSQL
+  - Leaflet
 techStack:
   visualization:
-    - D3.js
-    - Chart.js
     - Apache ECharts
+    - Leaflet (maps)
+    - Custom Vue components
   data:
     - PostgreSQL
+    - Read Replicas
     - Materialized Views
     - Redis Caching
   real-time:
     - WebSockets
-    - Server-Sent Events
+    - Ably
 screenshots: []
 ---
 
@@ -52,18 +53,7 @@ Drag-and-drop interface for creating custom reports:
 
 ### Live KPI Tracking
 
-Real-time metrics that update automatically:
-
-```typescript
-// Real-time KPI subscription
-const kpiStream = useKPIStream({
-  metrics: ['revenue', 'leads', 'appointments', 'sales'],
-  interval: '1m',
-  onUpdate: (data) => {
-    dashboardStore.updateMetrics(data)
-  },
-})
-```
+Real-time metrics that update automatically via WebSocket subscriptions, with configurable refresh intervals and automatic reconnection handling.
 
 ### Trend Analysis
 
@@ -74,28 +64,44 @@ Historical comparisons and pattern detection:
 - Growth rate calculations
 - Anomaly detection
 
+### Department Scorecards
+
+Specialized scorecards for each business function:
+
+| Scorecard | Key Metrics |
+|-----------|-------------|
+| **Branch** | Revenue, conversion rates, rep rankings per location |
+| **Production** | Jobs in progress, completion rates, days outstanding |
+| **Service** | Ticket volume, resolution time, customer satisfaction |
+| **Telemarketing** | Calls made, appointments set, conversion rates |
+| **Canvass** | Doors knocked, leads generated, rep performance |
+| **Technology** | System health, API latency, error rates |
+
+### Sales Reconciliation
+
+Tools for ensuring data integrity:
+
+- **Ghost Appointment Detection**: Find appointments without matching jobs
+- **Split Integrity Checks**: Verify sales commission splits are correct
+- **Data Reconciliation**: Compare CRM data against external sources
+
+## CMO Dashboard (Separate Service)
+
+A dedicated executive analytics platform with its own codebase:
+
+- **Real-time KPI Visualization**: Live metrics updating in real-time
+- **Cross-branch Performance**: Compare all 5 branches side-by-side
+- **Marketing ROI Tracking**: Attribution for lead sources
+- **Lead Source Attribution**: Track which marketing channels perform best
+- **Revenue Forecasting**: Predictive analytics for planning
+
+*The CMO Dashboard is a separate service that pulls from the same data sources, optimized for executive-level reporting without the operational features of the main BI module.*
+
 ## Technical Implementation
 
 ### Data Architecture
 
-Using materialized views for performant queries:
-
-```sql
-CREATE MATERIALIZED VIEW daily_revenue_summary AS
-SELECT 
-  date_trunc('day', closed_at) as date,
-  COUNT(*) as deals_count,
-  SUM(amount) as total_revenue,
-  AVG(amount) as avg_deal_size,
-  COUNT(*) FILTER (WHERE source = 'referral') as referral_count
-FROM deals
-WHERE status = 'won'
-GROUP BY date_trunc('day', closed_at)
-WITH DATA;
-
--- Refresh on schedule
-CREATE INDEX ON daily_revenue_summary (date DESC);
-```
+Heavy queries use PostgreSQL materialized views for pre-computed aggregations, refreshed on schedule to keep dashboards snappy while maintaining data freshness.
 
 ### Caching Strategy
 

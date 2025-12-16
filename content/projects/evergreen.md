@@ -1,6 +1,6 @@
 ---
 title: "Evergreen"
-description: "Enterprise platform powering all operations across 5 branches at Midtown Home Improvements. Prototyped in 2 weeks, evolved over 4+ years into a comprehensive system handling CRM, Call Center, BI, Client Portal, and more."
+description: "Enterprise platform powering all operations across 5 branches at Midtown Home Improvements. Prototyped in 2 weeks, evolved over 4+ years into a comprehensive ecosystem handling CRM, Call Center, BI, Client Portal, custom ML, mobile apps, and more."
 image: "/images/evergreen_featured.png"
 icon: "lucide:layout-dashboard"
 order: 1
@@ -14,40 +14,58 @@ tags:
   - Docker
   - Twilio
   - Prisma
+  - Convex
+  - BullMQ
+  - Python
+  - Capacitor
 stats:
   lines of code: "650K+"
   years: "4+"
-  data models: "77+"
+  data models: "77"
+  daily users: "200+"
+  services: "8+"
 techStack:
   frontend:
-    - Nuxt
+    - Nuxt 4
     - TypeScript
     - Tailwind CSS
     - Pinia
+    - Capacitor (iOS/Android)
   backend:
-    - Nest.js
+    - Nest.js (microservices)
+    - Nitro.js (TaskMaster)
     - PostgreSQL
     - Redis
-    - BullMQ
     - Prisma ORM
+  real-time:
+    - Convex
+    - Ably
     - WebSockets
+  ai:
+    - Python/scikit-learn (Oracle ML)
+    - Google Gemini
+    - OpenAI
+  background:
+    - BullMQ
+    - Trigger.dev
   infrastructure:
     - Docker
     - Read Replicas
-    - Async Workers
     - Bun
   integrations:
     - Twilio
-    - External Lead Sources
-  testing:
-    - Jest
-    - Cypress
+    - Algolia
+    - Linear
+    - SmartyStreets
+    - PostHog
 screenshots: ["/images/evergreen_featured.png", "/images/evergreen_featured.png"]
 ---
 
 ## Overview
 
-Evergreen is the comprehensive business platform I invented and built from the ground up at Midtown Home Improvements. I prototyped it in two weeks as a basic CRM, and over the last 5 years it has evolved into a full-scale enterprise system that powers every aspect of the business across all 5 branches.
+Evergreen is the comprehensive business platform I invented and built from the ground up at Midtown Home Improvements. I prototyped it in two weeks as a basic CRM, and over the last 4+ years it has evolved into a full-scale enterprise ecosystem—650K+ lines of code across 8+ interconnected services—that powers every aspect of the business across all 5 branches.
+
+The ecosystem includes the core Nuxt application, a real-time call center platform (Twilio + Convex) used daily by telemarketers, Nest.js microservice APIs, a custom ML prediction system (Oracle), a mobile field app with 200+ daily users (Cypress), a learning management system, and background job infrastructure processing tens of thousands of jobs daily.
 
 ## The Problem
 
@@ -70,46 +88,27 @@ The heart of Evergreen, managing the entire customer lifecycle:
 
 - **Lead Aggregator**: Integrated with external lead sources for automatic ingestion
 - **Contact Management**: Complete customer history in one place
-- **SMS Messaging**: Direct communication with leads and customers
-- **Pipeline Tracking**: Visual kanban boards for sales progression
+- **Oracle ML Scoring**: Custom model predicts sale probability and optimal rep assignment
+- **Property Enrichment**: Automatic enrichment with geo, property, and market data
 
-```typescript
-// Example: Lead scoring algorithm
-function calculateLeadScore(lead: Lead): number {
-  let score = 0
-  
-  // Source quality
-  score += getSourceWeight(lead.source)
-  
-  // Engagement signals
-  if (lead.openedEmail) score += 10
-  if (lead.visitedPricing) score += 20
-  if (lead.requestedCallback) score += 30
-  
-  // Demographics
-  score += getZipCodeScore(lead.zipCode)
-  
-  return Math.min(score, 100)
-}
-```
+#### Call Center Platform
+
+Real-time communication hub used daily by the telemarketing team:
+
+- **Browser-based Softphone**: Twilio VoIP calling directly in browser
+- **Convex Real-time State**: 9 tables for agent status, call queues, SMS threads
+- **Two-way SMS**: Real-time inbox with thread locking and DNC compliance
+- **AI Call Grading**: Gemini-powered analysis of call recordings
+- **Inbound/Outbound**: Handle incoming calls and structured outbound campaigns
 
 #### Business Intelligence Dashboard
 
 Real-time analytics giving leadership instant visibility:
 
 - **Live KPIs**: Sales metrics, conversion rates, revenue tracking
-- **Analytics & Reporting**: Comprehensive reporting across all operations
+- **Department Scorecards**: Branch, production, service, telemarketing, canvass
 - **Trend Analysis**: Historical comparisons and forecasting
-- **Team Performance**: Individual and team scorecards
-
-#### Call Center Platform
-
-Full Twilio-powered communication hub used by telemarketers daily:
-
-- **VoIP Integration**: Twilio-powered calling directly in browser
-- **Call Recording**: Automatic recording for quality assurance
-- **Real-time Monitoring**: Live dashboards for supervisors
-- **Outbound Campaigns**: Structured calling campaigns for sales teams
+- **CMO Dashboard**: Separate executive analytics service
 
 #### Client Portal
 
@@ -120,12 +119,32 @@ Self-service access for customers:
 - **Service Tickets**: Customer support request management
 - **Communication**: Direct messaging with project team
 
+#### Oracle - Custom ML Sales Prediction
+
+A custom-trained machine learning model that predicts sale outcomes:
+
+- **Sales Prediction**: Predicts likelihood of closing based on lead characteristics
+- **Rep Matching**: Ranks which sales rep has the best chance of closing each lead
+- **Lift Calculation**: Measures improvement over baseline random assignment
+- **Data Sources**: Trained on historical appointments, geolocation, soft credit, and market data
+
+#### Cypress - Mobile Field App
+
+Production mobile app (iOS/Android) with 200+ daily active users:
+
+- **Real-time GPS Tracking**: Admin dashboard shows 200+ canvassers live on map
+- **Door Knock Logging**: Every knock tracked with geo coordinates
+- **Field-to-Call-Center Pipeline**: Leads submitted from field go directly to TM queue
+- **Scaling Challenges Solved**: Batching, optimization for high-frequency location updates
+
 #### Additional Modules
 
-- **Helpdesk Tickets**: Internal IT and support ticket system
-- **Mobile App**: Built with Capacitor for field teams
-- **File Uploads**: Centralized document management
-- **Production Tracking**: End-to-end job lifecycle management
+- **AI/Automagic**: Call audio grading, transcription, grammar suggestions via Gemini/OpenAI
+- **TaskMaster**: Background job engine (Nitro.js/BullMQ) processing tens of thousands of jobs daily
+- **LMS**: Learning management system for employee onboarding and training
+- **SMS Platform**: Real-time two-way SMS with Convex-powered inbox and DNC compliance
+- **Helpdesk**: Internal ticket system with Linear integration
+- **Production Tracking**: End-to-end job lifecycle with installer portal
 
 ## Architecture Decisions
 
@@ -140,26 +159,29 @@ Building from scratch allowed us to:
 
 ### Technical Stack Choices
 
-**Nuxt + Nest.js**: Nuxt on the frontend for excellent DX and SSR capabilities. Nest.js on the backend for structured, scalable API development.
+**Nuxt 4 + Nest.js Microservices**: Nuxt on the frontend for excellent DX and SSR capabilities. Nest.js powers separate microservice APIs for specific domains.
 
-**PostgreSQL + Read Replicas**: Rock-solid relational database with read replicas for scaling query-heavy operations.
+**PostgreSQL + Read Replicas**: Rock-solid relational database with 77 models, 200+ indexes, and read replicas for scaling query-heavy operations.
 
-**Redis + BullMQ**: Powers real-time features, caching, and background job processing for async operations.
+**Convex + Ably**: Real-time state management for the call center with 9 Convex tables handling agent status, call queues, and SMS threads.
+
+**Redis + BullMQ**: Powers TaskMaster, processing tens of thousands of background jobs daily with dynamic module loading.
+
+**Python + scikit-learn**: Oracle ML system for sales prediction, trained on proprietary company data.
+
+**Capacitor**: Cypress mobile app delivering iOS/Android experience for 200+ daily field users.
 
 **Prisma ORM**: Type-safe database access with excellent migration tooling.
 
-**WebSockets**: Real-time updates for dashboards, call center, and collaborative features.
-
-**Docker + Bun**: Containerized deployments with Bun for improved performance.
-
 ### Architecture Patterns
 
-The system has evolved organically based on needs:
+The ecosystem has evolved based on real-world needs:
 
-- **Event Sourcing**: Some parts use event-driven patterns for audit trails and complex workflows
-- **Monolithic Core**: The main application is a well-structured monolith for simplicity
-- **Microservices**: Specific high-scale features broken into separate services
-- **Queue-based Processing**: BullMQ handles background jobs, email sending, and async operations
+- **Hybrid Real-time**: Convex for hot ephemeral state, Postgres for permanent storage
+- **Monolithic Core**: Main Nuxt application is a well-structured monolith for simplicity
+- **Microservices**: TaskMaster, Oracle, LMS, and CMO Dashboard as separate services
+- **Event-driven**: Domain-organized event handlers for complex workflows
+- **Queue-based Processing**: BullMQ with dynamic module loading for extensibility
 
 ## Impact
 
@@ -184,10 +206,10 @@ Building Evergreen taught me invaluable lessons about enterprise software:
 
 ## What's Next
 
-Evergreen continues to evolve with new modules and improvements planned:
+Evergreen continues to evolve:
 
-- AI-powered lead scoring using historical conversion data
-- Enhanced mobile experience for field teams
-- Advanced reporting with natural language queries
-- Deeper QuickBooks integration for financial workflows
+- Expanding Oracle ML with additional data sources and prediction models
+- Enhanced AI-powered call quality scoring and coaching
+- Deeper real-time analytics with natural language queries
+- Continued scaling optimizations for growing user base
 

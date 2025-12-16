@@ -16,9 +16,6 @@ techStack:
     - Nuxt 3
     - Tailwind CSS
     - TypeScript
-  payments:
-    - Stripe
-    - Stripe Elements
   documents:
     - DocuSign API
     - AWS S3
@@ -50,32 +47,6 @@ Secure access to all project documents:
 - Warranty information
 - Before/after photos
 
-### Payment Processing
-
-Secure online payments via Stripe:
-
-```typescript
-// Payment intent creation
-async function createPaymentIntent(invoiceId: string) {
-  const invoice = await prisma.invoice.findUnique({
-    where: { id: invoiceId },
-    include: { customer: true },
-  })
-
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: Math.round(invoice.amount * 100),
-    currency: 'usd',
-    customer: invoice.customer.stripeCustomerId,
-    metadata: {
-      invoiceId,
-      projectId: invoice.projectId,
-    },
-  })
-
-  return paymentIntent.client_secret
-}
-```
-
 ### Communication Hub
 
 Direct messaging with the project team:
@@ -86,37 +57,6 @@ Direct messaging with the project team:
 - Email notifications for responses
 
 ## Technical Implementation
-
-### Authentication
-
-Magic link authentication for friction-free access:
-
-```typescript
-// Generate magic link
-async function sendMagicLink(email: string) {
-  const customer = await prisma.customer.findUnique({
-    where: { email },
-  })
-  
-  if (!customer) return // Silent fail for security
-  
-  const token = generateSecureToken()
-  
-  await prisma.magicLink.create({
-    data: {
-      token,
-      customerId: customer.id,
-      expiresAt: addMinutes(new Date(), 15),
-    },
-  })
-  
-  await sendEmail({
-    to: email,
-    template: 'magic-link',
-    data: { link: `${baseUrl}/auth/verify?token=${token}` },
-  })
-}
-```
 
 ### Real-time Updates
 
