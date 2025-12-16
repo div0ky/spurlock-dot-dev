@@ -76,7 +76,7 @@ const otherProjects = computed(() => projects.filter(p => !p.featured))
       >
         <NuxtLink
           :to="`/projects/${featuredProject.slug}`"
-          class="group relative block overflow-hidden rounded-3xl border border-slate-800 bg-surface-elevated transition-all duration-500 hover:border-mint-500/30 hover:shadow-2xl hover:shadow-mint-500/10"
+          class="group relative block rounded-3xl border border-slate-800 bg-surface-elevated transition-all duration-500 hover:border-mint-500/30 hover:shadow-2xl hover:shadow-mint-500/10"
         >
           <div class="grid gap-8 p-8 lg:grid-cols-2 lg:p-12">
             <!-- Content -->
@@ -117,20 +117,16 @@ const otherProjects = computed(() => projects.filter(p => !p.featured))
             </div>
 
             <!-- Visual -->
-            <div class="relative">
+            <div class="relative self-start">
               <div class="aspect-video overflow-hidden rounded-2xl border border-slate-700 bg-surface-overlay">
-                <!-- Placeholder for screenshot -->
-                <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-mint-500/10 to-surface-elevated">
-                  <div class="text-center">
-                    <Icon
-                      name="lucide:layout-dashboard"
-                      class="mx-auto mb-4 h-20 w-20 text-mint-500/40"
-                    />
-                    <p class="text-body-md text-slate-500">
-                      Screenshot coming soon
-                    </p>
-                  </div>
-                </div>
+                <NuxtImg
+                  src="/images/evergreen_featured.png"
+                  alt="Evergreen Dashboard showing branch scorecards and analytics"
+                  width="640"
+                  height="360"
+                  class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
               </div>
 
               <!-- Decorative elements -->

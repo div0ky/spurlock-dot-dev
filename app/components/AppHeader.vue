@@ -49,7 +49,7 @@ function closeMobileMenu() {
 
           <a
             href="mailto:aj@spurlock.dev"
-            class="rounded-full bg-mint-500 px-5 py-2.5 text-label-lg font-medium text-slate-900 transition-all duration-300 hover:bg-mint-400 hover:shadow-glow-mint"
+            class="rounded-full bg-mint-500 px-5 py-2.5 text-label-lg font-medium text-slate-900 transition-all duration-300 hover:bg-mint-600 hover:shadow-glow-mint"
           >
             Contact
           </a>
@@ -93,7 +93,7 @@ function closeMobileMenu() {
 
           <a
             href="mailto:aj@spurlock.dev"
-            class="mt-2 rounded-lg bg-mint-500 px-4 py-3 text-center text-label-lg font-medium text-slate-900 transition-colors hover:bg-mint-400"
+            class="mt-2 rounded-lg bg-mint-500 px-4 py-3 text-center text-label-lg font-medium text-slate-900 transition-colors hover:bg-mint-600"
             @click="closeMobileMenu"
           >
             Contact

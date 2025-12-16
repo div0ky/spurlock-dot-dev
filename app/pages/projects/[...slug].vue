@@ -222,7 +222,7 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
         </p>
         <a
           href="mailto:aj@spurlock.dev"
-          class="inline-flex items-center gap-2 rounded-full bg-mint-500 px-8 py-4 text-label-lg font-semibold text-slate-900 transition-all duration-300 hover:bg-mint-400 hover:shadow-glow-mint-lg"
+          class="inline-flex items-center gap-2 rounded-full bg-mint-500 px-8 py-4 text-label-lg font-semibold text-slate-900 transition-all duration-300 hover:bg-mint-600 hover:shadow-glow-mint-lg"
         >
           <Icon
             name="lucide:mail"

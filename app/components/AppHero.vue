@@ -67,7 +67,7 @@ onMounted(() => {
         <div class="flex flex-col items-center gap-4 animate-fade-in-up sm:flex-row lg:justify-start stagger-4">
           <NuxtLink
             to="/#projects"
-            class="group flex items-center gap-2 rounded-full bg-mint-500 px-8 py-4 text-label-lg font-semibold text-slate-900 transition-all duration-300 hover:bg-mint-400 hover:shadow-glow-mint-lg"
+            class="group flex items-center gap-2 rounded-full bg-mint-500 px-8 py-4 text-label-lg font-semibold text-slate-900 transition-all duration-300 hover:bg-mint-600 hover:shadow-glow-mint-lg"
           >
             View My Work
             <Icon
@@ -113,11 +113,14 @@ onMounted(() => {
 
           <!-- Photo Frame -->
           <div class="relative h-72 w-72 overflow-hidden rounded-3xl border-2 border-mint-500/20 bg-surface-elevated lg:h-96 lg:w-96">
-            <img
+            <NuxtImg
               src="/images/headshot_v2.png"
               alt="Aaron J. Spurlock"
+              width="384"
+              height="384"
               class="h-full w-full object-cover object-top"
-            >
+              loading="eager"
+            />
 
             <!-- Decorative Corner -->
             <div class="absolute -bottom-2 -right-2 h-20 w-20 rounded-tl-3xl border-l-2 border-t-2 border-mint-500/30" />

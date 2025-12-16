@@ -1,7 +1,7 @@
 ---
 title: "Evergreen"
 description: "Enterprise platform powering all operations across 5 branches at Midtown Home Improvements. Prototyped in 2 weeks, evolved over 4+ years into a comprehensive system handling CRM, Call Center, BI, Client Portal, and more."
-image: ""
+image: "/images/evergreen_featured.png"
 icon: "lucide:layout-dashboard"
 order: 1
 featured: true
