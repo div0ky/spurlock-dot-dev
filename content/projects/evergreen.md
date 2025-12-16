@@ -15,9 +15,9 @@ tags:
   - Twilio
   - Prisma
 stats:
-  branches: "5"
+  lines of code: "650K+"
   years: "4+"
-  modules: "15+"
+  data models: "77+"
 techStack:
   frontend:
     - Nuxt
@@ -34,6 +34,7 @@ techStack:
   infrastructure:
     - Docker
     - Read Replicas
+    - Async Workers
     - Bun
   integrations:
     - Twilio
@@ -41,7 +42,7 @@ techStack:
   testing:
     - Jest
     - Cypress
-screenshots: []
+screenshots: ["/images/evergreen_featured.png", "/images/evergreen_featured.png"]
 ---
 
 ## Overview

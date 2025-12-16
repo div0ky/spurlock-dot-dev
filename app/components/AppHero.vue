@@ -1,9 +1,10 @@
 <script setup lang="ts">
 const titles = [
   'Head of Technology',
-  'Vue Certified Developer',
+  'Vue Certified',
   'Full-Stack Developer',
   'System Architect',
+  'DevOps Engineer',
 ]
 
 const currentTitleIndex = ref(0)
@@ -11,10 +12,11 @@ const currentTitleIndex = ref(0)
 onMounted(() => {
   setInterval(() => {
     currentTitleIndex.value = (currentTitleIndex.value + 1) % titles.length
-  }, 3000)
+  }, 2500)
 })
 
-const techStack = ['Vue', 'Nuxt', 'TypeScript', 'Python', 'Node.js', 'Bun', 'Redis', 'BullMQ', 'Prisma', 'PostgreSQL', 'Docker']
+const techStackArray = ['Vue', 'React', 'Nuxt', 'Django', 'Flask', 'Astro', 'MangoDB', 'TypeScript', 'Python', 'Node.js', 'Bun', 'Redis', 'BullMQ', 'Prisma', 'Tailwind CSS', 'WebSockets', 'Docker Swarm', 'Nitro.js', 'Nest.js', 'PostgreSQL', 'Docker']
+const techStack = computed(() => [...techStackArray].sort((a, b) => a.localeCompare(b)))
 </script>
 
 <template>
