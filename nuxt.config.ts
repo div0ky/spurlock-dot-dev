@@ -48,10 +48,7 @@ export default defineNuxtConfig({
         {
           innerHTML: `
             (function() {
-              var stored = localStorage.getItem('theme');
-              var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-              var shouldBeDark = stored === 'dark' || (stored === null && prefersDark);
-              if (!shouldBeDark) {
+              if (localStorage.getItem('theme') === 'light') {
                 document.documentElement.classList.remove('dark');
               }
             })();

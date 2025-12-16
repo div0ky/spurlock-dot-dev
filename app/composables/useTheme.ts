@@ -1,18 +1,14 @@
 // EFFECT: Manages theme state and persists to localStorage
 // Default is dark mode (html has 'dark' class via nuxt.config.ts)
+// Only switches to light if user explicitly stored 'light' preference
 export function useTheme() {
   const isDark = ref(true)
 
   function initializeTheme() {
     if (import.meta.server) return
 
-    const stored = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const shouldBeDark = stored === 'dark' || (stored === null && prefersDark)
-
-    isDark.value = shouldBeDark
-    // Sync state with what the blocking script already did
-    // The blocking script handles the initial DOM state
+    // Only light mode if explicitly stored
+    isDark.value = localStorage.getItem('theme') !== 'light'
   }
 
   function applyTheme(dark: boolean) {
