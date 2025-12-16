@@ -95,7 +95,7 @@ onMounted(() => {
           </p>
           <div class="flex flex-wrap items-center justify-center gap-4 lg:justify-start">
             <div
-              v-for="tech in ['Vue', 'Nuxt', 'TypeScript', 'Node.js', 'PostgreSQL', 'Docker']"
+              v-for="tech in ['Vue', 'Nuxt', 'TypeScript', 'Python', 'Node.js', 'Bun', 'Redis', 'BullMQ', 'Prisma', 'PostgreSQL', 'Docker']"
               :key="tech"
               class="rounded-lg bg-surface-elevated px-3 py-1.5 text-body-sm text-slate-400 transition-colors hover:bg-surface-overlay hover:text-mint-400"
             >
