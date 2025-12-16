@@ -4,7 +4,7 @@ useSeoMeta({
   title: 'Blog | Aaron J. Spurlock',
 })
 
-const { data: posts } = await useAsyncData('blog-posts', () =>
+const { data: posts, status } = await useAsyncData('blog-posts', () =>
   queryCollection('blog').all(),
 )
 
@@ -22,6 +22,8 @@ const filteredPosts = computed(() => {
   const tag = selectedTag.value
   return posts.value.filter(post => post.tags?.includes(tag))
 })
+
+const showEmptyState = computed(() => status.value === 'success' && !filteredPosts.value?.length)
 
 function selectTag(tag: null | string) {
   selectedTag.value = selectedTag.value === tag ? null : tag
@@ -93,16 +95,16 @@ function selectTag(tag: null | string) {
           v-if="filteredPosts?.length"
           class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
-        <BlogCard
-          v-for="post in filteredPosts"
-          :key="post.path"
-          :post="post"
-        />
+          <BlogCard
+            v-for="post in filteredPosts"
+            :key="post.path"
+            :post="post"
+          />
         </div>
 
-        <!-- Empty State -->
+        <!-- Empty State (only show when data is confirmed loaded and empty) -->
         <div
-          v-else
+          v-else-if="showEmptyState"
           class="rounded-2xl border border-dashed border-slate-300 p-16 text-center dark:border-slate-700"
         >
           <Icon

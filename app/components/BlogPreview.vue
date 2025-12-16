@@ -1,9 +1,10 @@
 <script setup lang="ts">
-const { data: posts } = await useAsyncData('latest-posts', async () => {
+const { data: posts, status } = await useAsyncData('latest-posts', async () => {
   const all = await queryCollection('blog').all()
   return all.slice(0, 3)
-},
-)
+})
+
+const showEmptyState = computed(() => status.value === 'success' && !posts.value?.length)
 </script>
 
 <template>
@@ -48,9 +49,9 @@ const { data: posts } = await useAsyncData('latest-posts', async () => {
       />
     </div>
 
-    <!-- Empty State -->
+    <!-- Empty State (only show when data is confirmed loaded and empty) -->
     <div
-      v-else
+      v-else-if="showEmptyState"
       class="rounded-2xl border border-dashed border-slate-300 p-12 text-center dark:border-slate-700"
     >
       <Icon
