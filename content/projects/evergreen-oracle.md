@@ -1,7 +1,6 @@
 ---
 title: "Oracle - Sales Prediction ML"
 description: "Custom-trained machine learning model that predicts sale outcomes, ranks sales reps by closing probability, and enables data-driven lead routing. Built on proprietary company data."
-image: "/images/evergreen_oracle.png"
 icon: "lucide:brain"
 order: 6
 parent: "evergreen"

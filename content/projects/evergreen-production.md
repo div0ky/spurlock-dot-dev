@@ -1,7 +1,6 @@
 ---
 title: "Production & Service System"
 description: "Full job lifecycle management from sale to completion. Service tickets, installer portal, change orders, payments, satisfaction surveys, and commission tracking."
-image: "/images/evergreen_production.png"
 icon: "lucide:wrench"
 order: 11
 parent: "evergreen"

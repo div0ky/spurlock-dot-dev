@@ -1,7 +1,6 @@
 ---
 title: "Cypress - Mobile Field App"
 description: "Production iOS/Android app for 200+ daily canvassers with real-time GPS tracking, door knock logging, and direct integration to call center queue. Includes compelling scaling story."
-image: "/images/evergreen_cypress.png"
 icon: "lucide:smartphone"
 order: 7
 parent: "evergreen"

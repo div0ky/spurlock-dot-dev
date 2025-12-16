@@ -1,7 +1,6 @@
 ---
 title: "Real-time SMS Platform"
 description: "Two-way SMS messaging with Convex-powered real-time inbox, thread locking to prevent agent collision, full DNC compliance with audit trail, and hybrid storage architecture."
-image: "/images/evergreen_sms.png"
 icon: "lucide:message-square"
 order: 10
 parent: "evergreen"

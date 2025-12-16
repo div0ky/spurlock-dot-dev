@@ -1,7 +1,7 @@
 ---
 title: "5 Years Building Enterprise Software: Lessons Learned"
 description: "Reflections on building and maintaining a large-scale business platform, from architecture decisions to team management."
-date: "2024-01-15"
+date: "2025-06-15"
 tags:
   - Architecture
   - Enterprise

@@ -1,7 +1,6 @@
 ---
 title: "TaskMaster - Background Job Engine"
 description: "Enterprise background job infrastructure processing tens of thousands of jobs daily. Built with Nitro.js, Redis, and BullMQ with dynamic module loading and plugin architecture."
-image: "/images/evergreen_taskmaster.png"
 icon: "lucide:cog"
 order: 13
 parent: "evergreen"

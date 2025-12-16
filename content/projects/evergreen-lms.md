@@ -1,7 +1,6 @@
 ---
 title: "Learning Management System"
 description: "Employee training platform with course builder, video hosting, interactive quizzes, certifications, and progress tracking. Powers onboarding and ongoing skill development."
-image: "/images/evergreen_lms.png"
 icon: "lucide:graduation-cap"
 order: 12
 parent: "evergreen"

@@ -1,7 +1,6 @@
 ---
 title: "Canvassing Analytics"
 description: "Geo-spatial analytics backend powering the Cypress mobile app. Door-to-door tracking, heat maps, location data, division scorecards, and points-based gamification."
-image: "/images/evergreen_canvass.png"
 icon: "lucide:map-pin"
 order: 9
 parent: "evergreen"
