@@ -113,13 +113,11 @@ onMounted(() => {
 
           <!-- Photo Frame -->
           <div class="relative h-72 w-72 overflow-hidden rounded-3xl border-2 border-mint-500/20 bg-surface-elevated lg:h-96 lg:w-96">
-            <!-- Placeholder - Replace with actual photo -->
-            <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-mint-500/10 to-surface-elevated">
-              <Icon
-                name="lucide:user"
-                class="h-32 w-32 text-mint-500/30"
-              />
-            </div>
+            <img
+              src="/images/headshot_v2.png"
+              alt="Aaron J. Spurlock"
+              class="h-full w-full object-cover object-top"
+            >
 
             <!-- Decorative Corner -->
             <div class="absolute -bottom-2 -right-2 h-20 w-20 rounded-tl-3xl border-l-2 border-t-2 border-mint-500/30" />
