@@ -25,7 +25,7 @@ function formatDate(dateStr: string): string {
 <template>
   <NuxtLink
     :to="post.path"
-    class="group block overflow-hidden rounded-2xl border border-slate-800 bg-surface-elevated transition-all duration-300 hover:border-mint-500/30 hover:shadow-lg"
+    class="group block overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-mint-500/30 hover:shadow-lg dark:border-slate-800 dark:bg-surface-elevated"
   >
     <!-- Image -->
     <div
@@ -57,12 +57,12 @@ function formatDate(dateStr: string): string {
       </div>
 
       <!-- Title -->
-      <h3 class="mb-2 text-headline-sm text-white transition-colors group-hover:text-mint-400">
+      <h3 class="mb-2 text-headline-sm text-slate-900 transition-colors group-hover:text-mint-600 dark:text-white dark:group-hover:text-mint-400">
         {{ post.title }}
       </h3>
 
       <!-- Description -->
-      <p class="mb-4 line-clamp-2 text-body-md text-slate-400">
+      <p class="mb-4 line-clamp-2 text-body-md text-slate-600 dark:text-slate-400">
         {{ post.description }}
       </p>
 
@@ -71,17 +71,18 @@ function formatDate(dateStr: string): string {
         v-if="post.tags?.length"
         class="flex flex-wrap gap-2"
       >
-        <span
+        <M3Badge
           v-for="tag in post.tags.slice(0, 3)"
           :key="tag"
-          class="rounded-lg bg-surface-overlay px-2.5 py-1 text-label-md text-slate-500"
+          variant="muted"
+          size="sm"
         >
           {{ tag }}
-        </span>
+        </M3Badge>
       </div>
 
       <!-- Read More -->
-      <div class="mt-4 flex items-center gap-2 text-label-lg font-medium text-mint-400 opacity-0 transition-opacity group-hover:opacity-100">
+      <div class="mt-4 flex items-center gap-2 text-label-lg font-medium text-mint-600 opacity-0 transition-opacity group-hover:opacity-100 dark:text-mint-400">
         Read Article
         <Icon
           name="lucide:arrow-right"
@@ -91,4 +92,3 @@ function formatDate(dateStr: string): string {
     </div>
   </NuxtLink>
 </template>
-

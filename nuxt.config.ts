@@ -37,9 +37,27 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        class: 'dark',
+      },
       title: 'Spurlock.dev | Developer Portfolio',
       meta: [
         { name: 'description', content: 'Aaron J. Spurlock - Vue Certified Developer, Head of Technology, and System Architect' },
+      ],
+      script: [
+        {
+          innerHTML: `
+            (function() {
+              var stored = localStorage.getItem('theme');
+              var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              var shouldBeDark = stored === 'dark' || (stored === null && prefersDark);
+              if (!shouldBeDark) {
+                document.documentElement.classList.remove('dark');
+              }
+            })();
+          `,
+          type: 'text/javascript',
+        },
       ],
     },
   },

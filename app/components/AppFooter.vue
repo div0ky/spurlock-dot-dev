@@ -16,7 +16,7 @@ const footerLinks = [
 </script>
 
 <template>
-  <footer class="border-t border-slate-800 bg-surface-dim">
+  <footer class="border-t border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-surface-dim">
     <div class="mx-auto max-w-6xl px-6 py-12">
       <div class="grid gap-8 md:grid-cols-3">
         <!-- Brand -->
@@ -26,20 +26,20 @@ const footerLinks = [
             class="inline-flex items-center gap-2"
           >
             <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-mint-500/10">
-              <span class="text-xl font-bold text-mint-400">S</span>
+              <span class="text-xl font-bold text-mint-600 dark:text-mint-400">S</span>
             </div>
-            <span class="text-title-lg font-semibold text-white">
-              Spurlock<span class="text-mint-400">.dev</span>
+            <span class="text-title-lg font-semibold text-slate-900 dark:text-white">
+              Spurlock<span class="text-mint-600 dark:text-mint-400">.dev</span>
             </span>
           </NuxtLink>
-          <p class="max-w-xs text-body-sm text-slate-400">
+          <p class="max-w-xs text-body-sm text-slate-600 dark:text-slate-400">
             Vue Certified Developer, Head of Technology, and System Architect building enterprise-grade solutions.
           </p>
         </div>
 
         <!-- Quick Links -->
         <div>
-          <h3 class="mb-4 text-label-lg font-semibold uppercase tracking-wider text-slate-400">
+          <h3 class="mb-4 text-label-lg font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
             Navigation
           </h3>
           <ul class="space-y-2">
@@ -49,7 +49,7 @@ const footerLinks = [
             >
               <NuxtLink
                 :to="link.href"
-                class="text-body-sm text-slate-400 transition-colors hover:text-mint-400"
+                class="text-body-sm text-slate-600 transition-colors hover:text-mint-600 dark:text-slate-400 dark:hover:text-mint-400"
               >
                 {{ link.label }}
               </NuxtLink>
@@ -59,7 +59,7 @@ const footerLinks = [
 
         <!-- Social Links -->
         <div>
-          <h3 class="mb-4 text-label-lg font-semibold uppercase tracking-wider text-slate-400">
+          <h3 class="mb-4 text-label-lg font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
             Connect
           </h3>
           <div class="flex gap-3">
@@ -70,7 +70,7 @@ const footerLinks = [
               :aria-label="social.label"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-elevated text-slate-400 transition-all duration-200 hover:bg-mint-500/10 hover:text-mint-400"
+              class="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-slate-600 shadow-sm transition-all duration-200 hover:bg-mint-500/10 hover:text-mint-600 dark:bg-surface-elevated dark:text-slate-400 dark:shadow-none dark:hover:text-mint-400"
             >
               <Icon
                 :name="social.icon"
@@ -82,7 +82,7 @@ const footerLinks = [
       </div>
 
       <!-- Bottom Bar -->
-      <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-800 pt-8 md:flex-row">
+      <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 dark:border-slate-800 md:flex-row">
         <p class="text-body-sm text-slate-500">
           &copy; {{ currentYear }} Aaron J. Spurlock. All rights reserved.
         </p>
@@ -98,4 +98,3 @@ const footerLinks = [
     </div>
   </footer>
 </template>
-

@@ -12,6 +12,11 @@ const props = defineProps<{
 
 const selectedIndex = ref<number | null>(null)
 
+const selectedScreenshot = computed(() => {
+  if (selectedIndex.value === null) return null
+  return props.screenshots[selectedIndex.value]
+})
+
 function openLightbox(index: number) {
   selectedIndex.value = index
   document.body.style.overflow = 'hidden'
@@ -56,7 +61,7 @@ onUnmounted(() => {
       v-if="title"
       class="mb-6"
     >
-      <h3 class="text-headline-sm text-white">
+      <h3 class="text-headline-sm text-slate-900 dark:text-white">
         {{ title }}
       </h3>
     </div>
@@ -66,7 +71,7 @@ onUnmounted(() => {
       <button
         v-for="(screenshot, index) in screenshots"
         :key="screenshot.src"
-        class="group relative aspect-video overflow-hidden rounded-xl border border-slate-800 bg-surface-elevated transition-all duration-300 hover:border-mint-500/30 hover:shadow-lg"
+        class="group relative aspect-video overflow-hidden rounded-xl border border-slate-200 bg-white transition-all duration-300 hover:border-mint-500/30 hover:shadow-lg dark:border-slate-800 dark:bg-surface-elevated"
         @click="openLightbox(index)"
       >
         <img
@@ -76,19 +81,19 @@ onUnmounted(() => {
         >
 
         <!-- Hover Overlay -->
-        <div class="absolute inset-0 flex items-center justify-center bg-surface/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div class="absolute inset-0 flex items-center justify-center bg-white/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-surface/60">
           <Icon
             name="lucide:maximize-2"
-            class="h-8 w-8 text-white"
+            class="h-8 w-8 text-slate-900 dark:text-white"
           />
         </div>
 
         <!-- Caption -->
         <div
           v-if="screenshot.caption"
-          class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-surface to-transparent p-3"
+          class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/80 to-transparent p-3 dark:from-surface"
         >
-          <p class="text-body-sm text-slate-300">
+          <p class="text-body-sm text-white dark:text-slate-300">
             {{ screenshot.caption }}
           </p>
         </div>
@@ -107,63 +112,60 @@ onUnmounted(() => {
       >
         <div
           v-if="selectedIndex !== null"
-          class="fixed inset-0 z-50 flex items-center justify-center bg-surface-dim/95 backdrop-blur-sm"
+          class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/95 backdrop-blur-sm dark:bg-surface-dim/95"
           @click.self="closeLightbox"
         >
           <!-- Close Button -->
-          <button
-            class="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-surface-elevated text-slate-400 transition-colors hover:bg-surface-overlay hover:text-white"
-            aria-label="Close"
+          <M3IconButton
+            icon="lucide:x"
+            label="Close"
+            variant="elevated"
+            size="lg"
+            class="absolute right-4 top-4"
             @click="closeLightbox"
-          >
-            <Icon
-              name="lucide:x"
-              class="h-6 w-6"
-            />
-          </button>
+          />
 
           <!-- Navigation -->
-          <button
-            class="absolute left-4 flex h-12 w-12 items-center justify-center rounded-full bg-surface-elevated text-slate-400 transition-colors hover:bg-surface-overlay hover:text-white"
-            aria-label="Previous"
+          <M3IconButton
+            icon="lucide:chevron-left"
+            label="Previous"
+            variant="elevated"
+            size="lg"
+            class="absolute left-4"
             @click="prevImage"
-          >
-            <Icon
-              name="lucide:chevron-left"
-              class="h-6 w-6"
-            />
-          </button>
+          />
 
-          <button
-            class="absolute right-4 flex h-12 w-12 items-center justify-center rounded-full bg-surface-elevated text-slate-400 transition-colors hover:bg-surface-overlay hover:text-white"
-            aria-label="Next"
+          <M3IconButton
+            icon="lucide:chevron-right"
+            label="Next"
+            variant="elevated"
+            size="lg"
+            class="absolute right-4"
             @click="nextImage"
-          >
-            <Icon
-              name="lucide:chevron-right"
-              class="h-6 w-6"
-            />
-          </button>
+          />
 
           <!-- Image -->
-          <div class="max-h-[85vh] max-w-[90vw]">
+          <div
+            v-if="selectedScreenshot"
+            class="max-h-[85vh] max-w-[90vw]"
+          >
             <img
-              :src="screenshots[selectedIndex].src"
-              :alt="screenshots[selectedIndex].alt"
+              :src="selectedScreenshot.src"
+              :alt="selectedScreenshot.alt"
               class="max-h-[85vh] max-w-full rounded-lg object-contain"
             >
 
             <!-- Caption -->
             <p
-              v-if="screenshots[selectedIndex].caption"
+              v-if="selectedScreenshot.caption"
               class="mt-4 text-center text-body-md text-slate-300"
             >
-              {{ screenshots[selectedIndex].caption }}
+              {{ selectedScreenshot.caption }}
             </p>
           </div>
 
           <!-- Counter -->
-          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-surface-elevated px-4 py-2 text-body-sm text-slate-400">
+          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-2 text-body-sm text-slate-600 shadow-lg dark:bg-surface-elevated dark:text-slate-400 dark:shadow-none">
             {{ selectedIndex + 1 }} / {{ screenshots.length }}
           </div>
         </div>
@@ -171,4 +173,3 @@ onUnmounted(() => {
     </Teleport>
   </div>
 </template>
-

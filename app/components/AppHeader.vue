@@ -7,6 +7,7 @@ const navLinks = [
 ]
 
 const isMobileMenuOpen = ref(false)
+const { isDark, toggleTheme } = useTheme()
 
 function toggleMobileMenu() {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -28,44 +29,49 @@ function closeMobileMenu() {
           @click="closeMobileMenu"
         >
           <div class="relative flex h-10 w-10 items-center justify-center rounded-xl bg-mint-500/10 transition-all duration-300 group-hover:bg-mint-500/20 group-hover:shadow-glow-mint">
-            <span class="text-xl font-bold text-mint-400">S</span>
+            <span class="text-xl font-bold text-mint-600 dark:text-mint-400">S</span>
           </div>
-          <span class="text-title-lg font-semibold text-white">
-            Spurlock<span class="text-mint-400">.dev</span>
+          <span class="text-title-lg font-semibold text-slate-900 dark:text-white">
+            Spurlock<span class="text-mint-600 dark:text-mint-400">.dev</span>
           </span>
         </NuxtLink>
 
         <!-- Desktop Navigation -->
-        <div class="hidden items-center gap-8 md:flex">
+        <div class="hidden items-center gap-6 md:flex">
           <NuxtLink
             v-for="link in navLinks"
             :key="link.href"
             :to="link.href"
-            class="relative text-body-md text-slate-300 transition-colors duration-200 hover:text-mint-400"
+            class="relative text-body-md text-slate-600 transition-colors duration-200 hover:text-mint-600 dark:text-slate-300 dark:hover:text-mint-400"
           >
             {{ link.label }}
-            <span class="absolute -bottom-1 left-0 h-0.5 w-0 bg-mint-400 transition-all duration-300 hover:w-full" />
+            <span class="absolute -bottom-1 left-0 h-0.5 w-0 bg-mint-500 transition-all duration-300 hover:w-full" />
           </NuxtLink>
 
-          <a
+          <M3IconButton
+            :icon="isDark ? 'lucide:sun' : 'lucide:moon'"
+            label="Toggle theme"
+            @click="toggleTheme"
+          />
+
+          <M3Button
+            as="a"
             href="mailto:aj@spurlock.dev"
-            class="rounded-full bg-mint-500 px-5 py-2.5 text-label-lg font-medium text-slate-900 transition-all duration-300 hover:bg-mint-600 hover:shadow-glow-mint"
+            variant="primary"
+            size="sm"
           >
             Contact
-          </a>
+          </M3Button>
         </div>
 
         <!-- Mobile Menu Button -->
-        <button
-          class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-300 transition-colors hover:bg-surface-elevated hover:text-mint-400 md:hidden"
-          aria-label="Toggle menu"
+        <M3IconButton
+          :icon="isMobileMenuOpen ? 'lucide:x' : 'lucide:menu'"
+          label="Toggle menu"
+          size="lg"
+          class="md:hidden"
           @click="toggleMobileMenu"
-        >
-          <Icon
-            :name="isMobileMenuOpen ? 'lucide:x' : 'lucide:menu'"
-            class="h-6 w-6"
-          />
-        </button>
+        />
       </div>
 
       <!-- Mobile Navigation -->
@@ -79,17 +85,29 @@ function closeMobileMenu() {
       >
         <div
           v-if="isMobileMenuOpen"
-          class="mt-4 flex flex-col gap-2 rounded-xl bg-surface-elevated p-4 md:hidden"
+          class="mt-4 flex flex-col gap-2 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-surface-elevated md:hidden"
         >
           <NuxtLink
             v-for="link in navLinks"
             :key="link.href"
             :to="link.href"
-            class="rounded-lg px-4 py-3 text-body-md text-slate-300 transition-colors hover:bg-surface-overlay hover:text-mint-400"
+            class="rounded-lg px-4 py-3 text-body-md text-slate-600 transition-colors hover:bg-slate-100 hover:text-mint-600 dark:text-slate-300 dark:hover:bg-surface-overlay dark:hover:text-mint-400"
             @click="closeMobileMenu"
           >
             {{ link.label }}
           </NuxtLink>
+
+          <button
+            class="flex h-12 w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-body-md text-slate-600 transition-colors hover:bg-slate-100 hover:text-mint-600 dark:text-slate-300 dark:hover:bg-surface-overlay dark:hover:text-mint-400"
+            aria-label="Toggle theme"
+            @click="toggleTheme"
+          >
+            <Icon
+              :name="isDark ? 'lucide:sun' : 'lucide:moon'"
+              class="h-5 w-5"
+            />
+            <span>{{ isDark ? 'Light Mode' : 'Dark Mode' }}</span>
+          </button>
 
           <a
             href="mailto:aj@spurlock.dev"
@@ -103,4 +121,3 @@ function closeMobileMenu() {
     </nav>
   </header>
 </template>
-

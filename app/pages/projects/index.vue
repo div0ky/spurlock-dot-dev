@@ -17,13 +17,13 @@ const { data: projects } = await useAsyncData('projects', () =>
       <div class="absolute inset-0 bg-grid opacity-50" />
 
       <div class="relative mx-auto max-w-6xl px-6 text-center">
-        <p class="mb-4 text-label-lg uppercase tracking-wider text-mint-400">
+        <p class="mb-4 text-label-lg uppercase tracking-wider text-mint-600 dark:text-mint-400">
           Portfolio
         </p>
-        <h1 class="mb-6 text-display-md text-white">
+        <h1 class="mb-6 text-display-md text-slate-900 dark:text-white">
           Projects
         </h1>
-        <p class="mx-auto max-w-2xl text-body-lg text-slate-400">
+        <p class="mx-auto max-w-2xl text-body-lg text-slate-600 dark:text-slate-400">
           A collection of enterprise software solutions I've designed and built,
           featuring the comprehensive Evergreen platform.
         </p>
@@ -41,11 +41,11 @@ const { data: projects } = await useAsyncData('projects', () =>
             v-for="project in projects"
             :key="project.path"
             :to="project.path"
-            class="group block overflow-hidden rounded-2xl border border-slate-800 bg-surface-elevated transition-all duration-500 hover:border-mint-500/30 hover:shadow-xl"
+            class="group block overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-500 hover:border-mint-500/30 hover:shadow-xl dark:border-slate-800 dark:bg-surface-elevated"
           >
             <div class="grid gap-6 p-6 md:grid-cols-3 md:p-8">
               <!-- Image -->
-              <div class="aspect-video overflow-hidden rounded-xl bg-surface-overlay md:aspect-[4/3]">
+              <div class="aspect-video overflow-hidden rounded-xl bg-slate-100 dark:bg-surface-overlay md:aspect-[4/3]">
                 <img
                   v-if="project.image"
                   :src="project.image"
@@ -54,7 +54,7 @@ const { data: projects } = await useAsyncData('projects', () =>
                 >
                 <div
                   v-else
-                  class="flex h-full w-full items-center justify-center bg-gradient-to-br from-mint-500/10 to-surface-elevated"
+                  class="flex h-full w-full items-center justify-center bg-gradient-to-br from-mint-500/10 to-white dark:to-surface-elevated"
                 >
                   <Icon
                     :name="project.icon || 'lucide:code-2'"
@@ -66,18 +66,19 @@ const { data: projects } = await useAsyncData('projects', () =>
               <!-- Content -->
               <div class="flex flex-col justify-center md:col-span-2">
                 <div class="mb-2 flex items-center gap-3">
-                  <h2 class="text-headline-md text-white transition-colors group-hover:text-mint-400">
+                  <h2 class="text-headline-md text-slate-900 transition-colors group-hover:text-mint-600 dark:text-white dark:group-hover:text-mint-400">
                     {{ project.title }}
                   </h2>
-                  <span
+                  <M3Badge
                     v-if="project.featured"
-                    class="rounded-full bg-mint-500/10 px-2 py-0.5 text-label-md text-mint-400"
+                    variant="primary"
+                    size="sm"
                   >
                     Featured
-                  </span>
+                  </M3Badge>
                 </div>
 
-                <p class="mb-4 text-body-lg text-slate-400">
+                <p class="mb-4 text-body-lg text-slate-600 dark:text-slate-400">
                   {{ project.description }}
                 </p>
 
@@ -85,16 +86,17 @@ const { data: projects } = await useAsyncData('projects', () =>
                   v-if="project.tags?.length"
                   class="mb-4 flex flex-wrap gap-2"
                 >
-                  <span
+                  <M3Badge
                     v-for="tag in project.tags.slice(0, 6)"
                     :key="tag"
-                    class="rounded-lg bg-surface-overlay px-2.5 py-1 text-label-md text-slate-500 transition-colors group-hover:text-slate-400"
+                    variant="muted"
+                    size="sm"
                   >
                     {{ tag }}
-                  </span>
+                  </M3Badge>
                 </div>
 
-                <div class="flex items-center gap-2 text-label-lg font-medium text-mint-400">
+                <div class="flex items-center gap-2 text-label-lg font-medium text-mint-600 dark:text-mint-400">
                   View Details
                   <Icon
                     name="lucide:arrow-right"
@@ -109,16 +111,16 @@ const { data: projects } = await useAsyncData('projects', () =>
         <!-- Empty State -->
         <div
           v-else
-          class="rounded-2xl border border-dashed border-slate-700 p-16 text-center"
+          class="rounded-2xl border border-dashed border-slate-300 p-16 text-center dark:border-slate-700"
         >
           <Icon
             name="lucide:folder"
-            class="mx-auto mb-4 h-16 w-16 text-slate-600"
+            class="mx-auto mb-4 h-16 w-16 text-slate-400 dark:text-slate-600"
           />
-          <h2 class="mb-2 text-headline-md text-slate-400">
+          <h2 class="mb-2 text-headline-md text-slate-500 dark:text-slate-400">
             Projects Coming Soon
           </h2>
-          <p class="text-body-lg text-slate-500">
+          <p class="text-body-lg text-slate-400 dark:text-slate-500">
             Detailed project breakdowns are being prepared. Check back soon!
           </p>
         </div>
@@ -126,4 +128,3 @@ const { data: projects } = await useAsyncData('projects', () =>
     </section>
   </div>
 </template>
-

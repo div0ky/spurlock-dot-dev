@@ -1,6 +1,8 @@
 import type { Config } from 'tailwindcss'
+import typography from '@tailwindcss/typography'
 
 export default {
+  darkMode: 'class',
   content: [
     './app/**/*.{vue,js,ts}',
     './components/**/*.{vue,js,ts}',
@@ -31,9 +33,10 @@ export default {
           950: '#080a0f',
         },
         surface: {
-          DEFAULT: '#0f1219',
-          elevated: '#161b26',
-          overlay: '#1e2433',
+          DEFAULT: 'var(--color-surface)',
+          dim: 'var(--color-surface-dim)',
+          elevated: 'var(--color-surface-container)',
+          overlay: 'var(--color-surface-container-high)',
         },
       },
       fontFamily: {
@@ -112,7 +115,7 @@ export default {
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
+    typography,
   ],
 } satisfies Config
 

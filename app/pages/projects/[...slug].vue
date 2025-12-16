@@ -42,7 +42,7 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
         <!-- Back Link -->
         <NuxtLink
           to="/projects"
-          class="group mb-8 inline-flex items-center gap-2 text-label-lg text-slate-400 transition-colors hover:text-mint-400"
+          class="group mb-8 inline-flex items-center gap-2 text-label-lg text-slate-500 transition-colors hover:text-mint-600 dark:text-slate-400 dark:hover:text-mint-400"
         >
           <Icon
             name="lucide:arrow-left"
@@ -59,22 +59,23 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
               v-if="project?.tags?.length"
               class="mb-4 flex flex-wrap gap-2"
             >
-              <span
+              <M3Badge
                 v-for="tag in project.tags"
                 :key="tag"
-                class="rounded-full bg-mint-500/10 px-3 py-1 text-label-md text-mint-400"
+                variant="primary"
+                size="sm"
               >
                 {{ tag }}
-              </span>
+              </M3Badge>
             </div>
 
             <!-- Title -->
-            <h1 class="mb-6 text-display-sm text-white md:text-display-md">
+            <h1 class="mb-6 text-display-sm text-slate-900 dark:text-white md:text-display-md">
               {{ project?.title }}
             </h1>
 
             <!-- Description -->
-            <p class="mb-8 text-body-lg text-slate-400">
+            <p class="mb-8 text-body-lg text-slate-600 dark:text-slate-400">
               {{ project?.description }}
             </p>
 
@@ -83,24 +84,24 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
               v-if="project?.stats"
               class="grid grid-cols-2 gap-4 sm:grid-cols-3"
             >
-              <div
+              <M3Card
                 v-for="(value, key) in project.stats"
                 :key="key"
-                class="rounded-xl border border-slate-800 bg-surface-elevated p-4"
+                class="p-4"
               >
-                <p class="text-display-sm text-mint-400">
+                <p class="text-display-sm text-mint-600 dark:text-mint-400">
                   {{ value }}
                 </p>
                 <p class="text-label-md uppercase tracking-wider text-slate-500">
                   {{ key }}
                 </p>
-              </div>
+              </M3Card>
             </div>
           </div>
 
           <!-- Hero Image -->
           <div class="relative">
-            <div class="aspect-video overflow-hidden rounded-2xl border border-slate-800 bg-surface-elevated">
+            <div class="aspect-video overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-surface-elevated">
               <img
                 v-if="project?.image"
                 :src="project.image"
@@ -109,7 +110,7 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
               >
               <div
                 v-else
-                class="flex h-full w-full items-center justify-center bg-gradient-to-br from-mint-500/10 to-surface-elevated"
+                class="flex h-full w-full items-center justify-center bg-gradient-to-br from-mint-500/10 to-white dark:to-surface-elevated"
               >
                 <Icon
                   :name="project?.icon || 'lucide:layout-dashboard'"
@@ -131,7 +132,7 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
         <ContentRenderer
           v-if="project"
           :value="project"
-          class="prose prose-lg prose-invert max-w-none prose-headings:font-semibold prose-headings:text-white prose-h2:mt-12 prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-p:text-slate-300 prose-a:text-mint-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:text-mint-400 prose-pre:bg-surface-elevated prose-pre:border prose-pre:border-slate-800 prose-blockquote:border-mint-500 prose-blockquote:text-slate-400 prose-li:text-slate-300 prose-img:rounded-xl prose-img:border prose-img:border-slate-800"
+          class="prose prose-lg max-w-none prose-headings:font-semibold prose-headings:text-slate-900 dark:prose-headings:text-white prose-h2:mt-12 prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-p:text-slate-600 dark:prose-p:text-slate-300 prose-a:text-mint-600 dark:prose-a:text-mint-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:text-mint-600 dark:prose-code:text-mint-400 prose-pre:bg-slate-100 dark:prose-pre:bg-surface-elevated prose-pre:border prose-pre:border-slate-200 dark:prose-pre:border-slate-800 prose-blockquote:border-mint-500 prose-blockquote:text-slate-500 dark:prose-blockquote:text-slate-400 prose-li:text-slate-600 dark:prose-li:text-slate-300 prose-img:rounded-xl prose-img:border prose-img:border-slate-200 dark:prose-img:border-slate-800"
         />
       </div>
     </article>
@@ -139,7 +140,7 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
     <!-- Screenshots Gallery -->
     <section
       v-if="project?.screenshots?.length"
-      class="border-t border-slate-800 py-16"
+      class="border-t border-slate-200 py-16 dark:border-slate-800"
     >
       <div class="mx-auto max-w-6xl px-6">
         <ScreenshotGallery
@@ -152,26 +153,26 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
     <!-- Tech Stack Detail -->
     <section
       v-if="project?.techStack"
-      class="border-t border-slate-800 bg-surface-dim py-16"
+      class="border-t border-slate-200 bg-slate-50 py-16 dark:border-slate-800 dark:bg-surface-dim"
     >
       <div class="mx-auto max-w-6xl px-6">
-        <h2 class="mb-8 text-center text-headline-lg text-white">
+        <h2 class="mb-8 text-center text-headline-lg text-slate-900 dark:text-white">
           Technology Stack
         </h2>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div
+          <M3Card
             v-for="(techs, category) in project.techStack"
             :key="category"
-            class="rounded-xl border border-slate-800 bg-surface-elevated p-6"
+            class="p-6"
           >
-            <h3 class="mb-4 text-title-lg font-semibold capitalize text-mint-400">
+            <h3 class="mb-4 text-title-lg font-semibold capitalize text-mint-600 dark:text-mint-400">
               {{ category }}
             </h3>
             <ul class="space-y-2">
               <li
                 v-for="tech in techs"
                 :key="tech"
-                class="flex items-center gap-2 text-body-md text-slate-400"
+                class="flex items-center gap-2 text-body-md text-slate-600 dark:text-slate-400"
               >
                 <Icon
                   name="lucide:check"
@@ -180,7 +181,7 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
                 {{ tech }}
               </li>
             </ul>
-          </div>
+          </M3Card>
         </div>
       </div>
     </section>
@@ -188,10 +189,10 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
     <!-- Related Projects -->
     <section
       v-if="relatedProjects?.length"
-      class="border-t border-slate-800 py-16"
+      class="border-t border-slate-200 py-16 dark:border-slate-800"
     >
       <div class="mx-auto max-w-6xl px-6">
-        <h2 class="mb-8 text-center text-headline-lg text-white">
+        <h2 class="mb-8 text-center text-headline-lg text-slate-900 dark:text-white">
           Related Projects
         </h2>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -212,26 +213,25 @@ const { data: relatedProjects } = await useAsyncData(`related-project-${slug}`, 
     </section>
 
     <!-- CTA -->
-    <section class="border-t border-slate-800 bg-surface-dim py-16">
+    <section class="border-t border-slate-200 bg-slate-50 py-16 dark:border-slate-800 dark:bg-surface-dim">
       <div class="mx-auto max-w-3xl px-6 text-center">
-        <h2 class="mb-4 text-headline-lg text-white">
+        <h2 class="mb-4 text-headline-lg text-slate-900 dark:text-white">
           Interested in working together?
         </h2>
-        <p class="mb-8 text-body-lg text-slate-400">
+        <p class="mb-8 text-body-lg text-slate-600 dark:text-slate-400">
           I'm always open to discussing new projects and opportunities.
         </p>
-        <a
+        <M3Button
+          as="a"
           href="mailto:aj@spurlock.dev"
-          class="inline-flex items-center gap-2 rounded-full bg-mint-500 px-8 py-4 text-label-lg font-semibold text-slate-900 transition-all duration-300 hover:bg-mint-600 hover:shadow-glow-mint-lg"
+          variant="primary"
+          size="lg"
+          icon="lucide:mail"
+          icon-position="left"
         >
-          <Icon
-            name="lucide:mail"
-            class="h-5 w-5"
-          />
           Get in Touch
-        </a>
+        </M3Button>
       </div>
     </section>
   </div>
 </template>
-

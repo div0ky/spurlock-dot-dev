@@ -19,7 +19,8 @@ const selectedTag = ref<string | null>(null)
 const filteredPosts = computed(() => {
   if (!posts.value) return []
   if (!selectedTag.value) return posts.value
-  return posts.value.filter(post => post.tags?.includes(selectedTag.value))
+  const tag = selectedTag.value
+  return posts.value.filter(post => post.tags?.includes(tag))
 })
 
 function selectTag(tag: string | null) {
@@ -35,13 +36,13 @@ function selectTag(tag: string | null) {
       <div class="absolute inset-0 bg-grid opacity-50" />
 
       <div class="relative mx-auto max-w-6xl px-6 text-center">
-        <p class="mb-4 text-label-lg uppercase tracking-wider text-mint-400">
+        <p class="mb-4 text-label-lg uppercase tracking-wider text-mint-600 dark:text-mint-400">
           Blog
         </p>
-        <h1 class="mb-6 text-display-md text-white">
+        <h1 class="mb-6 text-display-md text-slate-900 dark:text-white">
           Articles & Thoughts
         </h1>
-        <p class="mx-auto max-w-2xl text-body-lg text-slate-400">
+        <p class="mx-auto max-w-2xl text-body-lg text-slate-600 dark:text-slate-400">
           Exploring development patterns, system architecture, and lessons learned
           from building enterprise software.
         </p>
@@ -65,7 +66,7 @@ function selectTag(tag: string | null) {
                 'rounded-full px-4 py-2 text-label-lg transition-all duration-200',
                 !selectedTag
                   ? 'bg-mint-500 text-slate-900'
-                  : 'bg-surface-elevated text-slate-400 hover:bg-surface-overlay hover:text-white',
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 dark:bg-surface-elevated dark:text-slate-400 dark:hover:bg-surface-overlay dark:hover:text-white',
               ]"
               @click="selectTag(null)"
             >
@@ -78,7 +79,7 @@ function selectTag(tag: string | null) {
                 'rounded-full px-4 py-2 text-label-lg transition-all duration-200',
                 selectedTag === tag
                   ? 'bg-mint-500 text-slate-900'
-                  : 'bg-surface-elevated text-slate-400 hover:bg-surface-overlay hover:text-white',
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 dark:bg-surface-elevated dark:text-slate-400 dark:hover:bg-surface-overlay dark:hover:text-white',
               ]"
               @click="selectTag(tag)"
             >
@@ -102,16 +103,16 @@ function selectTag(tag: string | null) {
         <!-- Empty State -->
         <div
           v-else
-          class="rounded-2xl border border-dashed border-slate-700 p-16 text-center"
+          class="rounded-2xl border border-dashed border-slate-300 p-16 text-center dark:border-slate-700"
         >
           <Icon
             name="lucide:file-text"
-            class="mx-auto mb-4 h-16 w-16 text-slate-600"
+            class="mx-auto mb-4 h-16 w-16 text-slate-400 dark:text-slate-600"
           />
-          <h2 class="mb-2 text-headline-md text-slate-400">
+          <h2 class="mb-2 text-headline-md text-slate-500 dark:text-slate-400">
             No Posts Yet
           </h2>
-          <p class="text-body-lg text-slate-500">
+          <p class="text-body-lg text-slate-400 dark:text-slate-500">
             Blog posts are coming soon. Check back later!
           </p>
         </div>
@@ -119,4 +120,3 @@ function selectTag(tag: string | null) {
     </section>
   </div>
 </template>
-

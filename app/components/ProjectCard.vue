@@ -16,10 +16,10 @@ defineProps<{
 <template>
   <NuxtLink
     :to="`/projects/${project.slug}`"
-    class="group relative block overflow-hidden rounded-2xl border border-slate-800 bg-surface-elevated transition-all duration-500 hover:border-mint-500/30 hover:shadow-xl hover:shadow-mint-500/5"
+    class="group relative block overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-500 hover:border-mint-500/30 hover:shadow-xl hover:shadow-mint-500/5 dark:border-slate-800 dark:bg-surface-elevated"
   >
     <!-- Image -->
-    <div class="relative aspect-video overflow-hidden bg-surface-overlay">
+    <div class="relative aspect-video overflow-hidden bg-slate-100 dark:bg-surface-overlay">
       <NuxtImg
         v-if="project.image"
         :src="project.image"
@@ -31,7 +31,7 @@ defineProps<{
       />
       <div
         v-else
-        class="flex h-full w-full items-center justify-center bg-gradient-to-br from-mint-500/10 to-surface-elevated"
+        class="flex h-full w-full items-center justify-center bg-gradient-to-br from-mint-500/10 to-white dark:to-surface-elevated"
       >
         <Icon
           name="lucide:code-2"
@@ -54,7 +54,7 @@ defineProps<{
       </div>
 
       <!-- Hover Overlay -->
-      <div class="absolute inset-0 flex items-center justify-center bg-surface/80 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+      <div class="absolute inset-0 flex items-center justify-center bg-white/80 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 dark:bg-surface/80">
         <span class="flex items-center gap-2 rounded-full bg-mint-500 px-6 py-3 text-label-lg font-semibold text-slate-900">
           View Project
           <Icon
@@ -67,30 +67,31 @@ defineProps<{
 
     <!-- Content -->
     <div class="p-6">
-      <h3 class="mb-2 text-headline-sm text-white transition-colors group-hover:text-mint-400">
+      <h3 class="mb-2 text-headline-sm text-slate-900 transition-colors group-hover:text-mint-600 dark:text-white dark:group-hover:text-mint-400">
         {{ project.title }}
       </h3>
-      <p class="mb-4 line-clamp-2 text-body-md text-slate-400">
+      <p class="mb-4 line-clamp-2 text-body-md text-slate-600 dark:text-slate-400">
         {{ project.description }}
       </p>
 
       <!-- Tags -->
       <div class="flex flex-wrap gap-2">
-        <span
+        <M3Badge
           v-for="tag in project.tags.slice(0, 4)"
           :key="tag"
-          class="rounded-lg bg-surface-overlay px-2.5 py-1 text-label-md text-slate-500 transition-colors group-hover:text-slate-400"
+          variant="muted"
+          size="sm"
         >
           {{ tag }}
-        </span>
-        <span
+        </M3Badge>
+        <M3Badge
           v-if="project.tags.length > 4"
-          class="rounded-lg bg-surface-overlay px-2.5 py-1 text-label-md text-slate-500"
+          variant="muted"
+          size="sm"
         >
           +{{ project.tags.length - 4 }}
-        </span>
+        </M3Badge>
       </div>
     </div>
   </NuxtLink>
 </template>
-

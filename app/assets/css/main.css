@@ -12,7 +12,7 @@
   --color-on-primary: #052e14;
   --color-on-primary-container: #86efb4;
 
-  /* Surface - Dark Grey */
+  /* Surface - Dark Grey (default dark theme) */
   --color-surface: #0f1219;
   --color-surface-dim: #080a0f;
   --color-surface-bright: #1e2433;
@@ -63,6 +63,37 @@
   --shadow-glow: 0 0 20px rgba(34, 201, 104, 0.3);
 }
 
+/* Light Theme Overrides */
+:root:not(.dark) {
+  /* Surface - Clean White */
+  --color-surface: #ffffff;
+  --color-surface-dim: #f8fafc;
+  --color-surface-bright: #ffffff;
+  --color-surface-container: #f1f5f9;
+  --color-surface-container-high: #e2e8f0;
+  --color-surface-container-highest: #cbd5e1;
+
+  /* On Surface */
+  --color-on-surface: #0f172a;
+  --color-on-surface-variant: #475569;
+
+  /* Outline */
+  --color-outline: #e2e8f0;
+  --color-outline-variant: #f1f5f9;
+
+  /* Primary adjustments for light mode contrast */
+  --color-primary: #16a34f;
+  --color-primary-light: #22c968;
+  --color-primary-dark: #15803e;
+  --color-on-primary-container: #166534;
+
+  /* Shadows - Lighter for light theme */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 20px rgba(22, 163, 79, 0.15);
+}
+
 /* Base Styles */
 html {
   scroll-behavior: smooth;
@@ -80,6 +111,23 @@ body {
 ::selection {
   background-color: var(--color-primary-container);
   color: var(--color-on-primary-container);
+}
+
+/* Theme-aware text utilities */
+.text-heading {
+  color: var(--color-on-surface);
+}
+
+.text-body {
+  color: var(--color-on-surface-variant);
+}
+
+.text-muted {
+  color: #64748b;
+}
+
+.dark .text-muted {
+  color: #94a3b8;
 }
 
 /* Focus States - M3 Expressive */
@@ -170,8 +218,8 @@ a:hover {
 .stagger-4 { animation-delay: 400ms; }
 .stagger-5 { animation-delay: 500ms; }
 
-/* Mesh Background Pattern */
-.bg-mesh {
+/* Mesh Background Pattern - Dark */
+.dark .bg-mesh {
   background-image:
     radial-gradient(at 40% 20%, rgba(34, 201, 104, 0.15) 0px, transparent 50%),
     radial-gradient(at 80% 0%, rgba(34, 201, 104, 0.1) 0px, transparent 50%),
@@ -180,11 +228,29 @@ a:hover {
     radial-gradient(at 0% 100%, rgba(34, 201, 104, 0.1) 0px, transparent 50%);
 }
 
-/* Grid Pattern Overlay */
-.bg-grid {
+/* Mesh Background Pattern - Light */
+.bg-mesh {
+  background-image:
+    radial-gradient(at 40% 20%, rgba(22, 163, 79, 0.06) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(22, 163, 79, 0.04) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(22, 163, 79, 0.03) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, rgba(22, 163, 79, 0.02) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(22, 163, 79, 0.04) 0px, transparent 50%);
+}
+
+/* Grid Pattern Overlay - Dark */
+.dark .bg-grid {
   background-image: 
     linear-gradient(rgba(34, 201, 104, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(34, 201, 104, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Grid Pattern Overlay - Light */
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(22, 163, 79, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 163, 79, 0.04) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
@@ -198,9 +264,16 @@ a:hover {
 
 /* Glass Effect */
 .glass {
-  background: rgba(22, 27, 38, 0.8);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.dark .glass {
+  background: rgba(22, 27, 38, 0.8);
   border: 1px solid var(--color-outline-variant);
+  box-shadow: none;
 }
 
