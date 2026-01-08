@@ -35,8 +35,12 @@ function formatDate(dateStr: string): string {
 // Get related posts by tags
 const { data: relatedPosts } = await useAsyncData(`related-${slug}`, async () => {
   if (!post.value?.tags?.length) return []
-  const all = await queryCollection('blog').all()
-  return all.filter(p => p.path !== fullPath).slice(0, 3)
+  const all = await queryCollection('blog').order('date', 'DESC').all()
+  const tags = new Set(post.value.tags)
+  return all
+    .filter(p => p.path !== fullPath)
+    .filter(p => p.tags?.some(t => tags.has(t)))
+    .slice(0, 3)
 })
 </script>
 

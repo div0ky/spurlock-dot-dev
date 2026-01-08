@@ -5,7 +5,7 @@ useSeoMeta({
 })
 
 const { data: posts } = await useAsyncData('blog-posts', () =>
-  queryCollection('blog').all(),
+  queryCollection('blog').order('date', 'DESC').all(),
 )
 
 const allTags = computed(() => {
