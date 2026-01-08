@@ -26,7 +26,7 @@ const jobs: Job[] = [
     ],
     isCurrent: true,
     period: '2021 - Present',
-    technologies: ['Nuxt', 'Nest.js', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'Twilio', 'Prisma'],
+    technologies: ['Nuxt', 'Nest.js', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'Twilio', 'Prisma', 'Management'],
     title: 'Head of Technology',
   },
   {
@@ -55,6 +55,22 @@ const jobs: Job[] = [
     period: '2020 - 2021',
     technologies: ['JavaScript', 'Node.js', 'APIs', 'Live Streaming', 'WebRTC'],
     title: 'Technical Support Engineer',
+  },
+  {
+    company: 'Buyback Express',
+    description: 'General Manager for an ecommerce business - owned day-to-day operations end-to-end while also driving software, automation, and infrastructure improvements across the company.',
+    duration: '2 years',
+    highlights: [
+      'Ran warehouse ops and online fulfillment',
+      'Owned HR, payroll, hiring/firing, and company policy creation',
+      'Managed the web app and day-to-day operational tooling',
+      'Wrote Python code for data engineering, reporting, and database automation',
+      'Built custom Java apps for shipping/receiving to automate product grading and listing',
+      'Managed network, servers, and internal IT operations',
+    ],
+    period: '2017-2019',
+    technologies: ['Python', 'SQL', 'Java', 'Data Engineering', 'Analytics', 'Linux', 'Networking', 'Servers', 'Management'],
+    title: 'General Manager',
   },
   {
     company: 'Apple',
