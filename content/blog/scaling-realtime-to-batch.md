@@ -14,7 +14,7 @@ readingTime: 10
 
 ## The Dream: Real-time Everything
 
-When we built Cypress—our mobile field app for 200+ canvassers—the vision was beautifully simple: every door knock, every GPS ping, every lead submission would flow into the system in real-time. Managers would watch a live map as their team fanned out across neighborhoods. Hot leads would appear in the call center queue within seconds of a canvasser marking someone as interested.
+When we built Cypress-our mobile field app for 200+ canvassers-the vision was beautifully simple: every door knock, every GPS ping, every lead submission would flow into the system in real-time. Managers would watch a live map as their team fanned out across neighborhoods. Hot leads would appear in the call center queue within seconds of a canvasser marking someone as interested.
 
 Real-time is intoxicating. It feels modern. It impresses stakeholders. And it works... until it doesn't.
 
@@ -60,7 +60,7 @@ Here's the math that broke us:
 - Plus **lead submissions** (~50/hour)
 - Plus **activity logging** for every significant action
 
-Our PostgreSQL connection pool was thrashing. The database server's write-ahead log couldn't keep up. API response times climbed from 50ms to 500ms to timeouts. The admin dashboard—which polled for updates—started showing stale data because queries were queuing behind the write backlog.
+Our PostgreSQL connection pool was thrashing. The database server's write-ahead log couldn't keep up. API response times climbed from 50ms to 500ms to timeouts. The admin dashboard-which polled for updates-started showing stale data because queries were queuing behind the write backlog.
 
 The symptoms cascaded:
 
@@ -69,11 +69,11 @@ The symptoms cascaded:
 3. **Connection pool exhausted** → Read queries (dashboard, CRM) started failing
 4. **Users complained** → "The map isn't updating" / "I can't log my knock"
 
-We were experiencing **backpressure**—the system couldn't drain data as fast as it was being produced—and we had no mechanism to handle it.
+We were experiencing **backpressure**-the system couldn't drain data as fast as it was being produced-and we had no mechanism to handle it.
 
 ## The Realization: Writes Have Different Urgencies
 
-Not all writes are created equal. When a canvasser submits a hot lead, that data needs to hit the database *now*—a telemarketer is waiting to call them. But GPS location updates? Activity logs? Those can wait a few seconds (or even minutes) without anyone noticing.
+Not all writes are created equal. When a canvasser submits a hot lead, that data needs to hit the database *now*-a telemarketer is waiting to call them. But GPS location updates? Activity logs? Those can wait a few seconds (or even minutes) without anyone noticing.
 
 We categorized our writes:
 
@@ -304,7 +304,7 @@ It's *not* appropriate when:
 
 ## Final Thoughts
 
-The seductive trap of real-time systems is thinking that "real-time" means "synchronous database writes on every event." It doesn't. Real-time means users see fresh data—but "fresh" can mean "a few seconds old" for many use cases.
+The seductive trap of real-time systems is thinking that "real-time" means "synchronous database writes on every event." It doesn't. Real-time means users see fresh data-but "fresh" can mean "a few seconds old" for many use cases.
 
 Our canvassers don't notice that their GPS coordinates take 30 seconds to appear on the admin map. They do notice when the app hangs because the server is overwhelmed. By embracing batching and backpressure handling, we built a system that *feels* real-time while being robust enough to handle 200+ concurrent users without breaking a sweat.
 

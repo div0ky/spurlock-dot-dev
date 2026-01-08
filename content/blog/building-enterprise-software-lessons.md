@@ -9,11 +9,11 @@ tags:
 readingTime: 8
 ---
 
-After nearly five years of building Evergreen - a comprehensive enterprise platform that handles CRM, business intelligence, call center operations, and client portals—I've accumulated a wealth of lessons that I wish I'd known from day one.
+After nearly five years of building Evergreen - a comprehensive enterprise platform that handles CRM, business intelligence, call center operations, and client portals-I've accumulated a wealth of lessons that I wish I'd known from day one.
 
 ## 1. Start with the Data Model
 
-The single most important decision you'll make is your data model. Everything else - UI, features, integrations—can be changed relatively easily. Your core data model cannot.
+The single most important decision you'll make is your data model. Everything else - UI, features, integrations-can be changed relatively easily. Your core data model cannot.
 
 Spend the time upfront to really understand:
 
@@ -140,7 +140,7 @@ Good documentation is a feature. It reduces bus factor, speeds up onboarding, an
 
 Five years in, Evergreen is more successful than I ever imagined. It's grown from a simple CRM to the nervous system of the entire business.
 
-The next five years will bring new challenges—AI integration, mobile expansion, and scaling the team. But the foundational lessons remain the same:
+The next five years will bring new challenges-AI integration, mobile expansion, and scaling the team. But the foundational lessons remain the same:
 
 - Invest in foundations
 - Choose simplicity over cleverness
